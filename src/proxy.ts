@@ -13,9 +13,8 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
-  if (authRoutes.includes(pathname) && sessionCookie) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
-  }
+  // A cookie can outlive its database session. Keep login/signup reachable so
+  // the server's session check cannot bounce back into a redirect loop.
 
   return NextResponse.next();
 }

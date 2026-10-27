@@ -78,6 +78,7 @@ En el entorno del candidato ya se creó el administrador. Sus credenciales está
 
 ```sh
 bun run lint
+bun run test:unit
 bun run typecheck
 bun run build
 ```

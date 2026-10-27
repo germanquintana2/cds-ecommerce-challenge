@@ -29,6 +29,12 @@ Ejecutada el 27 de octubre de 2026.
 
 Las pruebas usan únicamente una base cuyo nombre termina en `_test`, aplican migraciones y eliminan sus registros al terminar. No realizan pagos ni suben archivos a S3.
 
-## Límites
+## Regresión de navegación con sesión inválida
+
+Se corrigió un bucle heredado del proxy: una cookie presente podía enviar desde login al dashboard aunque su sesión ya no existiera, y la comprobación real del dashboard devolvía al login. Login y registro ahora permanecen accesibles con una cookie inválida; las operaciones y páginas protegidas siguen verificando la sesión en servidor.
+
+`bun run test:unit` agrega cuatro pruebas de navegación: login y signup con cookie inválida, redirección de una página protegida sin cookie y paso hacia la validación en servidor cuando hay cookie. También se comprobaron login y signup por HTTP con cookie inválida, sin redirección.
+
+## Límites de esta etapa
 
 No se implementó ni probó todavía el recorrido completo de compra, el CRUD de productos, la subida desde la aplicación ni el webhook. La prueba de unicidad de órdenes verifica una restricción de datos; no sustituye la futura prueba de pagos repetidos o concurrentes. No se realizó una prueba visual automatizada en navegador.
