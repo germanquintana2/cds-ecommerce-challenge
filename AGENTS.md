@@ -121,3 +121,17 @@ Constraints for each level:
 <!-- END AWS Agent Toolkit rules -->
 
 AWS help_level: HIGH (explain steps, alternatives, and best practices).
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->
+
+## E-commerce payment confirmation exception
+
+Preserve the template conventions above. For the e-commerce implementation, a narrow exception to the tRPC-only database access rule is allowed: the server-only payment confirmation service may use Prisma transactions when called by the Stripe webhook handler after signature verification. It must not be exposed as a public tRPC procedure or called directly by UI components. Database access for storefront, cart, administration, and order queries continues through tRPC procedures. See `docs/arquitectura.md` for the planned transaction and authorization boundaries. This documents the design; it does not authorize starting implementation before the user's instruction.

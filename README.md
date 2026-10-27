@@ -1,36 +1,109 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CDS E-commerce Challenge
 
-## Getting Started
+Base del challenge técnico de CodigoDelSur: Next.js, TypeScript, tRPC, Better Auth y PostgreSQL con Prisma.
 
-First, run the development server:
+Actualmente conserva la aplicación de tareas de la plantilla. El catálogo, los roles, el carrito, las órdenes y Stripe todavía no están implementados. El bucket S3 ya está configurado; la integración con la aplicación está pendiente.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Requisitos
+
+- Node.js 24.
+- Bun 1.2.20, versión declarada en `package.json`.
+- Docker con Docker Compose.
+
+## Ejecutar localmente
+
+### 1. Variables de entorno
+
+```sh
+cp .env.example .env
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Editar `.env` antes de continuar:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Reemplazar `POSTGRES_PASSWORD` por una contraseña local generada con `openssl rand -hex 16`.
+- Usar la misma contraseña en `DATABASE_URL`.
+- Reemplazar `BETTER_AUTH_SECRET` con el resultado de `openssl rand -hex 32`.
+- Mantener `BETTER_AUTH_URL=http://localhost:3100`.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+No subir `.env` a Git. `.env.example` contiene únicamente ejemplos y parámetros no secretos. El entorno ya preparado en la computadora del candidato tiene sus propios secretos aleatorios.
 
-## Learn More
+### 2. Instalar dependencias
 
-To learn more about Next.js, take a look at the following resources:
+```sh
+bun install --frozen-lockfile
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 3. Iniciar PostgreSQL
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```sh
+docker compose up -d --wait
+```
 
-## Deploy on Vercel
+Se crea una base exclusiva del challenge en `localhost:5433`, accesible únicamente desde esta computadora, con datos persistentes en el volumen `cds-ecommerce-challenge_postgres_data`. No utiliza ni modifica otros contenedores PostgreSQL existentes.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Si se cambia `POSTGRES_PORT`, actualizar también el puerto de `DATABASE_URL`. Las credenciales de PostgreSQL inicializan un volumen nuevo; cambiarlas en `.env` no cambia automáticamente la contraseña de una base ya creada.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 4. Generar el cliente y aplicar migraciones existentes
+
+```sh
+bun run db:generate
+bun run db:deploy
+```
+
+Para crear migraciones futuras durante el desarrollo se usa `bun run db:migrate`. No es necesario crear nuevas migraciones para arrancar esta base.
+
+### 5. Iniciar Next.js
+
+```sh
+bun run dev
+```
+
+Abrir [http://localhost:3100/login](http://localhost:3100/login). El puerto `3100` evita interferir con otros proyectos locales. Si se cambia, actualizar los scripts de Next.js y `BETTER_AUTH_URL`.
+
+La plantilla incluye pantalla de login y endpoints de registro y sesión de Better Auth, pero no incluye pantalla de registro ni usuarios precargados. Durante la preparación se verificó el flujo mediante la API con un usuario temporal que fue eliminado al terminar.
+
+## Comprobaciones
+
+```sh
+bun run lint
+bun run typecheck
+bun run build
+```
+
+`typecheck` genera primero los tipos de rutas de Next.js. `build` utiliza las fuentes de Google declaradas en la plantilla y puede requerir acceso a internet.
+
+Para ejecutar la compilación de producción, detener antes el servidor de desarrollo y ejecutar:
+
+```sh
+bun run start
+```
+
+## Base de datos
+
+```sh
+docker compose ps
+bun run db:studio
+docker compose stop
+```
+
+Detener el contenedor conserva los datos. Eliminar el volumen con `docker compose down -v` borra definitivamente la base local; no se necesita para el arranque normal.
+
+## AWS S3
+
+Consultar [configuración y verificación de S3](docs/aws/s3.md). La aplicación local base puede arrancar sin conectarse a AWS. El perfil `cds-challenge` y el bucket documentado pertenecen al entorno del candidato; otro desarrollador debe configurar sus propios recursos para probar la integración futura.
+
+## Stripe
+
+La configuración de pagos de prueba está documentada en [preparación de Stripe](docs/stripe.md). Las claves locales ya fueron verificadas; el checkout y el receptor de webhooks siguen pendientes de implementación.
+
+## Planificación del challenge
+
+- [Alcance y criterios de aceptación](docs/alcance.md).
+- [Arquitectura, modelo de datos y flujo de pagos](docs/arquitectura.md).
+- [Plan de implementación, validación y entrega](docs/plan-implementacion.md).
+
+## Origen e instrucciones de la plantilla
+
+- [Origen de la plantilla](docs/template-origin.md).
+- [Convenciones del proyecto y reglas AWS](AGENTS.md).
+- Skills preservadas en `.agents/skills/`, con sus enlaces en `.claude/skills/`.
