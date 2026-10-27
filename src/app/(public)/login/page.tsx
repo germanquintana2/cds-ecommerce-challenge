@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -99,6 +100,12 @@ export default function LoginPage() {
             {isSubmitting ? "Logging in…" : "Log in"}
           </Button>
         </form>
+        <p className="text-sm">
+          ¿Todavía no tenés cuenta?{" "}
+          <Link href="/signup" className="underline">
+            Registrate
+          </Link>
+        </p>
       </div>
     </div>
   );

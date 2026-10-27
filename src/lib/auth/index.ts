@@ -10,6 +10,17 @@ export const auth = betterAuth({
   }),
   emailAndPassword: {
     enabled: true,
+    minPasswordLength: 12,
+    maxPasswordLength: 128,
+  },
+  user: {
+    additionalFields: {
+      role: {
+        type: ["CUSTOMER", "ADMIN"],
+        defaultValue: "CUSTOMER",
+        input: false,
+      },
+    },
   },
   plugins: [nextCookies()],
 });

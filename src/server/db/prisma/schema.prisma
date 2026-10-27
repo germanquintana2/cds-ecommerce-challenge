@@ -13,16 +13,20 @@ datasource db {
 }
 
 model User {
-  id            String     @id
+  id            String            @id
   name          String
   email         String
-  emailVerified Boolean    @default(false)
+  emailVerified Boolean           @default(false)
   image         String?
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
   sessions      Session[]
   accounts      Account[]
   toDoItems     ToDoItem[]
+  role          Role              @default(CUSTOMER)
+  cart          Cart?
+  checkouts     CheckoutAttempt[]
+  orders        Order[]
 
   @@unique([email])
   @@map("user")
@@ -89,4 +93,135 @@ model ToDoItem {
 
   @@index([createdBy])
   @@map("to_do_item")
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+enum CheckoutStatus {
+  PENDING
+  PAID
+  EXPIRED
+  FAILED
+}
+
+enum OrderStatus {
+  PAID
+}
+
+model Product {
+  id            String         @id @default(cuid())
+  name          String
+  description   String
+  priceCents    Int
+  imageKey      String?
+  active        Boolean        @default(false)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  cartItems     CartItem[]
+  checkoutItems CheckoutItem[]
+  orderItems    OrderItem[]
+
+  @@index([active, createdAt])
+  @@map("product")
+}
+
+model Cart {
+  id        String            @id @default(cuid())
+  userId    String            @unique
+  version   Int               @default(0)
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+  user      User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items     CartItem[]
+  checkouts CheckoutAttempt[]
+
+  @@map("cart")
+}
+
+model CartItem {
+  id        String  @id @default(cuid())
+  cartId    String
+  productId String
+  quantity  Int
+  cart      Cart    @relation(fields: [cartId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+
+  @@unique([cartId, productId])
+  @@index([productId])
+  @@map("cart_item")
+}
+
+model CheckoutAttempt {
+  id                    String         @id @default(cuid())
+  userId                String
+  cartId                String
+  cartVersion           Int
+  requestKey            String
+  status                CheckoutStatus @default(PENDING)
+  currency              String         @default("USD")
+  totalCents            Int
+  stripeSessionId       String?        @unique
+  stripePaymentIntentId String?        @unique
+  expiresAt             DateTime?
+  createdAt             DateTime       @default(now())
+  updatedAt             DateTime       @updatedAt
+  user                  User           @relation(fields: [userId], references: [id], onDelete: Restrict)
+  cart                  Cart           @relation(fields: [cartId], references: [id], onDelete: Restrict)
+  items                 CheckoutItem[]
+  order                 Order?
+
+  @@unique([userId, requestKey])
+  @@index([userId, createdAt])
+  @@index([cartId])
+  @@map("checkout_attempt")
+}
+
+model CheckoutItem {
+  id                String          @id @default(cuid())
+  checkoutAttemptId String
+  productId         String
+  productName       String
+  unitPriceCents    Int
+  quantity          Int
+  checkoutAttempt   CheckoutAttempt @relation(fields: [checkoutAttemptId], references: [id], onDelete: Cascade)
+  product           Product         @relation(fields: [productId], references: [id], onDelete: Restrict)
+
+  @@unique([checkoutAttemptId, productId])
+  @@index([productId])
+  @@map("checkout_item")
+}
+
+model Order {
+  id                String          @id @default(cuid())
+  userId            String
+  checkoutAttemptId String          @unique
+  status            OrderStatus     @default(PAID)
+  currency          String          @default("USD")
+  totalCents        Int
+  paidAt            DateTime
+  createdAt         DateTime        @default(now())
+  user              User            @relation(fields: [userId], references: [id], onDelete: Restrict)
+  checkoutAttempt   CheckoutAttempt @relation(fields: [checkoutAttemptId], references: [id], onDelete: Restrict)
+  items             OrderItem[]
+
+  @@index([userId, createdAt])
+  @@map("order")
+}
+
+model OrderItem {
+  id             String  @id @default(cuid())
+  orderId        String
+  productId      String
+  productName    String
+  unitPriceCents Int
+  quantity       Int
+  order          Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product        Product @relation(fields: [productId], references: [id], onDelete: Restrict)
+
+  @@unique([orderId, productId])
+  @@index([productId])
+  @@map("order_item")
 }

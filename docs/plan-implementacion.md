@@ -1,6 +1,13 @@
 # Plan de implementación y validación
 
-Documento de trabajo. No empezar a modificar funcionalidades hasta la indicación del usuario. No hacer commits ni pushes durante la preparación; publicar únicamente cuando el usuario lo indique.
+Documento de trabajo. El usuario autorizó publicar la preparación e iniciar la implementación el 27 de octubre de 2026.
+
+## Avance
+
+- Preparación publicada en `51c4ef5`.
+- Primera etapa: esquema y migración, restricciones SQL, registro CUSTOMER, adminProcedure con rol consultado en base, seed administrativo y acceso al panel.
+- Validación de permisos y restricciones en una base `_test` independiente.
+- El CRUD de productos, la integración de imágenes, el carrito y el checkout siguen pendientes.
 
 ## Orden de trabajo
 

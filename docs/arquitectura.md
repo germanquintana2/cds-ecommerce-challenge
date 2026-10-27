@@ -1,6 +1,6 @@
 # Arquitectura y modelo de datos
 
-Diseño objetivo para la implementación. No se modificó todavía el esquema Prisma.
+Diseño objetivo para la implementación. El esquema Prisma y sus restricciones SQL ya están implementados; los módulos de producto, carrito y pagos se construirán sobre esa base.
 
 ## Estructura
 

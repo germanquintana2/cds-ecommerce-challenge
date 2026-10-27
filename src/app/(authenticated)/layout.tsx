@@ -1,4 +1,5 @@
-import Link from "next/link";
+import { Suspense } from "react";
+import { AccountNavigation } from "./_components/account-navigation";
 
 type AuthenticatedLayoutProps = {
   children: React.ReactNode;
@@ -8,21 +9,11 @@ export default function AuthenticatedLayout({
   children,
 }: AuthenticatedLayoutProps) {
   return (
-    <div className="flex flex-1">
-      <aside className="w-56 shrink-0 space-y-1 border-r border-foreground/10 p-4">
-        <Link
-          href="/dashboard"
-          className="block rounded-md px-3 py-2 text-sm font-medium hover:bg-foreground/10"
-        >
-          Dashboard
-        </Link>
-
-        <Link
-          href="/profile"
-          className="block rounded-md px-3 py-2 text-sm font-medium hover:bg-foreground/10"
-        >
-          My Profile
-        </Link>
+    <div className="flex flex-1 flex-col md:flex-row">
+      <aside className="shrink-0 border-b p-4 md:w-56 md:border-r md:border-b-0">
+        <Suspense fallback={<p>Cargando cuenta…</p>}>
+          <AccountNavigation />
+        </Suspense>
       </aside>
 
       <main className="flex-1 p-4">{children}</main>

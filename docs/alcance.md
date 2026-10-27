@@ -73,5 +73,5 @@ Se documentarán por separado las pruebas completadas y las pendientes. Una cred
 - PostgreSQL local, migraciones originales, compilación y autenticación base verificados.
 - S3 configurado y probado; falta integración con el producto.
 - CLI, clave y secreto local de Stripe preparados; falta integración de pagos.
-- El código conserva el ejemplo de tareas; todavía no existe el e-commerce.
-- No hacer nuevos commits ni pushes hasta finalizar la configuración y recibir la indicación del usuario para publicar.
+- El modelo del e-commerce, los roles, el registro y el administrador inicial ya están implementados. El ejemplo de tareas se conserva temporalmente; el catálogo, carrito y checkout siguen pendientes.
+- El usuario autorizó publicar la preparación e iniciar la implementación el 27 de octubre de 2026.

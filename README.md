@@ -2,7 +2,7 @@
 
 Base del challenge técnico de CodigoDelSur: Next.js, TypeScript, tRPC, Better Auth y PostgreSQL con Prisma.
 
-Actualmente conserva la aplicación de tareas de la plantilla. El catálogo, los roles, el carrito, las órdenes y Stripe todavía no están implementados. El bucket S3 ya está configurado; la integración con la aplicación está pendiente.
+La primera etapa incluye modelo de datos del e-commerce, registro, roles CUSTOMER/ADMIN, verificación de permisos y administrador inicial. El catálogo, el carrito, la compra y las pantallas de órdenes todavía no están implementados. El ejemplo de tareas de la plantilla se conserva temporalmente hasta reemplazarlo por la tienda. S3 y Stripe están configurados; sus integraciones siguen pendientes.
 
 ## Requisitos
 
@@ -60,7 +60,19 @@ bun run dev
 
 Abrir [http://localhost:3100/login](http://localhost:3100/login). El puerto `3100` evita interferir con otros proyectos locales. Si se cambia, actualizar los scripts de Next.js y `BETTER_AUTH_URL`.
 
-La plantilla incluye pantalla de login y endpoints de registro y sesión de Better Auth, pero no incluye pantalla de registro ni usuarios precargados. Durante la preparación se verificó el flujo mediante la API con un usuario temporal que fue eliminado al terminar.
+Crear una cuenta de cliente desde [http://localhost:3100/signup](http://localhost:3100/signup). Las contraseñas requieren entre 12 y 128 caracteres. El registro público siempre crea CUSTOMER; no permite elegir rol.
+
+### 6. Preparar el administrador
+
+Configurar `ADMIN_EMAIL`, `ADMIN_PASSWORD` y opcionalmente `ADMIN_NAME` en `.env`. Usar una contraseña propia de 12 a 128 caracteres y ejecutar:
+
+```sh
+bun run db:seed
+```
+
+El seed crea el usuario mediante Better Auth, asigna ADMIN en servidor y elimina la sesión generada durante el registro. Repetir el comando conserva las credenciales existentes. Si el email ya pertenece a un CUSTOMER, el comando se detiene sin promoverlo. Si falla entre la creación y la asignación del rol, elegir un email nuevo o revisar el registro local antes de reintentar.
+
+En el entorno del candidato ya se creó el administrador. Sus credenciales están únicamente en `.env`. Después de iniciar sesión, abrir [http://localhost:3100/admin](http://localhost:3100/admin). El panel confirma el acceso administrativo; el CRUD de productos se implementará en la siguiente etapa.
 
 ## Comprobaciones
 
@@ -71,6 +83,22 @@ bun run build
 ```
 
 `typecheck` genera primero los tipos de rutas de Next.js. `build` utiliza las fuentes de Google declaradas en la plantilla y puede requerir acceso a internet.
+
+### Pruebas de integración
+
+Crear una base de pruebas independiente dentro del mismo contenedor:
+
+```sh
+docker compose exec -T postgres createdb -U cds cds_ecommerce_test
+```
+
+Reemplazar `cds` si se configuró otro `POSTGRES_USER`. Este comando se ejecuta una sola vez. Configurar `TEST_DATABASE_URL` en `.env` con la misma contraseña/puerto locales y el nombre de esa base; luego ejecutar:
+
+```sh
+bun run test:integration
+```
+
+Las pruebas exigen un nombre de base terminado en `_test`, aplican las migraciones existentes allí y limpian únicamente sus propios registros. Comprueban escalamiento de privilegios, revocación de rol con sesión existente, logout, restricciones de cantidades/precios y unicidad de orden por intento. No consultan AWS ni Stripe.
 
 Para ejecutar la compilación de producción, detener antes el servidor de desarrollo y ejecutar:
 
