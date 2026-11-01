@@ -1,0 +1,44 @@
+diff --git a/dist/compiled/react-server-dom-turbopack/cjs/react-server-dom-turbopack-client.browser.development.js b/dist/compiled/react-server-dom-turbopack/cjs/react-server-dom-turbopack-client.browser.development.js
+index 5d664220c00ab44ea46267508ffd757c6749f6e5..f318bd2f4d84798a58cfe77f69c3a4f290fbb6aa 100644
+--- a/dist/compiled/react-server-dom-turbopack/cjs/react-server-dom-turbopack-client.browser.development.js
++++ b/dist/compiled/react-server-dom-turbopack/cjs/react-server-dom-turbopack-client.browser.development.js
+@@ -3904,7 +3904,7 @@
+                         );
+                       performance.measure(measureName, {
+                         start: 0 > startTime$jscomp$2 ? 0 : startTime$jscomp$2,
+-                        end: childrenEndTime$jscomp$1,
++                        end: Math.max(0, startTime$jscomp$2, childrenEndTime$jscomp$1),
+                         detail: {
+                           devtools: {
+                             color: "error",
+@@ -4162,7 +4162,7 @@
+                       );
+                     performance.measure(measureName$jscomp$1, {
+                       start: 0 > startTime$jscomp$5 ? 0 : startTime$jscomp$5,
+-                      end: childrenEndTime$jscomp$3,
++                      end: Math.max(0, startTime$jscomp$5, childrenEndTime$jscomp$3),
+                       detail: {
+                         devtools: {
+                           color: "warning",
+diff --git a/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js b/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js
+index d9c2e5e801c91b2edbc0101c56af14c3dda6c42e..61346bf8104ddef5ce3e629c83e29625617e2e2a 100644
+--- a/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js
++++ b/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js
+@@ -3906,7 +3906,7 @@
+                         );
+                       performance.measure(measureName, {
+                         start: 0 > startTime$jscomp$2 ? 0 : startTime$jscomp$2,
+-                        end: childrenEndTime$jscomp$1,
++                        end: Math.max(0, startTime$jscomp$2, childrenEndTime$jscomp$1),
+                         detail: {
+                           devtools: {
+                             color: "error",
+@@ -4164,7 +4164,7 @@
+                       );
+                     performance.measure(measureName$jscomp$1, {
+                       start: 0 > startTime$jscomp$5 ? 0 : startTime$jscomp$5,
+-                      end: childrenEndTime$jscomp$3,
++                      end: Math.max(0, startTime$jscomp$5, childrenEndTime$jscomp$3),
+                       detail: {
+                         devtools: {
+                           color: "warning",

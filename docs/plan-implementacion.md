@@ -2,12 +2,13 @@
 
 Documento de trabajo. El usuario autorizó publicar la preparación e iniciar la implementación el 27 de octubre de 2026.
 
-## Avance
+## Avance actual
 
-- Preparación publicada en `51c4ef5`.
-- Primera etapa: esquema y migración, restricciones SQL, registro CUSTOMER, adminProcedure con rol consultado en base, seed administrativo y acceso al panel.
-- Validación de permisos y restricciones en una base `_test` independiente.
-- El CRUD de productos, la integración de imágenes, el carrito y el checkout siguen pendientes.
+Las etapas de datos, permisos, productos/S3, catálogo, carrito, pagos y órdenes están implementadas. También hay categorías con portada y asignaciones, eliminación confirmada, búsqueda priorizada, paginación y navegación responsive. El dashboard redirige al perfil.
+
+El candidato confirmó las pruebas manuales completas y correctas; queda el arranque desde una instalación limpia. El registro vigente es [validacion.md](validacion.md). Typecheck, lint, build, 14 pruebas unitarias y 38 de integración aprobados.
+
+El trabajo final permanece local: no hacer commits ni pushes hasta autorización del candidato.
 
 ## Orden de trabajo
 

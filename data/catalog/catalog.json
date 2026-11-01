@@ -1,0 +1,539 @@
+{
+  "version": 1,
+  "exportedAt": "2026-11-01T02:16:43.294Z",
+  "categories": [
+    {
+      "id": "category-general",
+      "name": "Celulares",
+      "image": {
+        "file": "f0dac01898dd2556648158b854c815f4b949bb4a215b810f9931a8be5ab91363.webp",
+        "sha256": "f0dac01898dd2556648158b854c815f4b949bb4a215b810f9931a8be5ab91363"
+      }
+    },
+    {
+      "id": "cmvvm89u60000txy20go8293g",
+      "name": "Accesorios",
+      "image": {
+        "file": "4da8228b97456e2f28a1432cf2d80b513fce2796f35f7c2c4a92963dda9c7693.webp",
+        "sha256": "4da8228b97456e2f28a1432cf2d80b513fce2796f35f7c2c4a92963dda9c7693"
+      }
+    },
+    {
+      "id": "cmvvmnpzm0001txy2q4m5apn5",
+      "name": "Computadoras",
+      "image": null
+    },
+    {
+      "id": "cmvwwkj04000jw8y2yyt34jn6",
+      "name": "Tablets",
+      "image": {
+        "file": "0faa565f460891d0213aace5c77f959427419aa1fce6fb7f5040233cfa7ef827.webp",
+        "sha256": "0faa565f460891d0213aace5c77f959427419aa1fce6fb7f5040233cfa7ef827"
+      }
+    },
+    {
+      "id": "cmvwwkj1z000sw8y2984yv0bb",
+      "name": "Audio",
+      "image": {
+        "file": "0d9a2c651d2577eee43220e1f9908c8ee9afa79a5e03370ff6ae276d4d7dac98.webp",
+        "sha256": "0d9a2c651d2577eee43220e1f9908c8ee9afa79a5e03370ff6ae276d4d7dac98"
+      }
+    }
+  ],
+  "products": [
+    {
+      "id": "cmvqyg47u0000lgi7g8hyh0k8",
+      "name": "Iphone 18 pro",
+      "description": "celular de la marca apple",
+      "priceCents": 110000,
+      "active": true,
+      "categoryId": "category-general",
+      "createdAt": "2026-10-27T17:24:02.010Z",
+      "image": {
+        "file": "ca674c570335a63e19c2356e1211996f524ac270f354227e295af7b4c8fef380.webp",
+        "sha256": "ca674c570335a63e19c2356e1211996f524ac270f354227e295af7b4c8fef380"
+      }
+    },
+    {
+      "id": "cmvvdjip3000f68i7f6rt7ak0",
+      "name": "sticker",
+      "description": "adhesivo",
+      "priceCents": 50,
+      "active": true,
+      "categoryId": "cmvvm89u60000txy20go8293g",
+      "createdAt": "2026-10-30T19:37:39.687Z",
+      "image": {
+        "file": "3179b8d94f36552beb76dcc37857cbbde88721be67502b7b547c43151ee787c0.webp",
+        "sha256": "3179b8d94f36552beb76dcc37857cbbde88721be67502b7b547c43151ee787c0"
+      }
+    },
+    {
+      "id": "cmvvldp8o0004gky2dy7lm8eu",
+      "name": "Iphone 11 Pro",
+      "description": "Celular de la marca Apple",
+      "priceCents": 50000,
+      "active": true,
+      "categoryId": "category-general",
+      "createdAt": "2026-10-30T23:17:05.160Z",
+      "image": {
+        "file": "69b30b7efccfeb73ecd2e4e8b24886e12e65c785dba35059a73a22982b1b4de0.webp",
+        "sha256": "69b30b7efccfeb73ecd2e4e8b24886e12e65c785dba35059a73a22982b1b4de0"
+      }
+    },
+    {
+      "id": "cmvwwkivn0000w8y27qbqonsk",
+      "name": "iPhone 12",
+      "description": "iPhone 12. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 29900,
+      "active": true,
+      "categoryId": "category-general",
+      "createdAt": "2026-10-31T21:18:05.459Z",
+      "image": {
+        "file": "499da85d030796eec48b93f350fc2ba42f208216e168af34379264eaaab78a6f.webp",
+        "sha256": "499da85d030796eec48b93f350fc2ba42f208216e168af34379264eaaab78a6f"
+      }
+    },
+    {
+      "id": "cmvwwkiw00001w8y2wbsfkqjs",
+      "name": "iPhone 12 mini",
+      "description": "iPhone 12 mini. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 27900,
+      "active": true,
+      "categoryId": "category-general",
+      "createdAt": "2026-10-31T21:18:05.472Z",
+      "image": {
+        "file": "0b50b9d8756181caf00c6ae4e3a482e52ebb4a3bb6022e43def68d126aef91a1.webp",
+        "sha256": "0b50b9d8756181caf00c6ae4e3a482e52ebb4a3bb6022e43def68d126aef91a1"
+      }
+    },
+    {
+      "id": "cmvwwkiwa0002w8y2pt7lnfyu",
+      "name": "iPhone 12 Pro",
+      "description": "iPhone 12 Pro. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 34900,
+      "active": true,
+      "categoryId": "category-general",
+      "createdAt": "2026-10-31T21:18:05.482Z",
+      "image": {
+        "file": "af44e5cc630bdaed4a9312e0f7680cf78db783d44710802662bc426b9708f377.webp",
+        "sha256": "af44e5cc630bdaed4a9312e0f7680cf78db783d44710802662bc426b9708f377"
+      }
+    },
+    {
+      "id": "cmvwwkiwi0003w8y29ukef76l",
+      "name": "iPhone 12 Pro Max",
+      "description": "iPhone 12 Pro Max. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 39900,
+      "active": true,
+      "categoryId": "category-general",
+      "createdAt": "2026-10-31T21:18:05.490Z",
+      "image": {
+        "file": "af44e5cc630bdaed4a9312e0f7680cf78db783d44710802662bc426b9708f377.webp",
+        "sha256": "af44e5cc630bdaed4a9312e0f7680cf78db783d44710802662bc426b9708f377"
+      }
+    },
+    {
+      "id": "cmvwwkiwq0004w8y2gyg3fujj",
+      "name": "iPhone 13",
+      "description": "iPhone 13. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 39900,
+      "active": true,
+      "categoryId": "category-general",
+      "createdAt": "2026-10-31T21:18:05.498Z",
+      "image": {
+        "file": "123d177c2800aacd29348d46584d260f7cc60a389374658b7465da5f6f9d0a4e.webp",
+        "sha256": "123d177c2800aacd29348d46584d260f7cc60a389374658b7465da5f6f9d0a4e"
+      }
+    },
+    {
+      "id": "cmvwwkiwx0005w8y2nzt7mwwd",
+      "name": "iPhone 13 mini",
+      "description": "iPhone 13 mini. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 37900,
+      "active": true,
+      "categoryId": "category-general",
+      "createdAt": "2026-10-31T21:18:05.505Z",
+      "image": {
+        "file": "48d1c9ae454528bb99449b94c9722fda2f92a22c40a92c178da2d77aa8df38c8.webp",
+        "sha256": "48d1c9ae454528bb99449b94c9722fda2f92a22c40a92c178da2d77aa8df38c8"
+      }
+    },
+    {
+      "id": "cmvwwkix50006w8y2er8ay641",
+      "name": "iPhone 13 Pro",
+      "description": "iPhone 13 Pro. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 44900,
+      "active": true,
+      "categoryId": "category-general",
+      "createdAt": "2026-10-31T21:18:05.513Z",
+      "image": {
+        "file": "f52b2427c0081e0344c0090f6a0d1f135e479f8d8ffc3fe175d398916f913bba.webp",
+        "sha256": "f52b2427c0081e0344c0090f6a0d1f135e479f8d8ffc3fe175d398916f913bba"
+      }
+    },
+    {
+      "id": "cmvwwkixc0007w8y23pjva8t6",
+      "name": "iPhone 13 Pro Max",
+      "description": "iPhone 13 Pro Max. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 49900,
+      "active": true,
+      "categoryId": "category-general",
+      "createdAt": "2026-10-31T21:18:05.520Z",
+      "image": {
+        "file": "f52b2427c0081e0344c0090f6a0d1f135e479f8d8ffc3fe175d398916f913bba.webp",
+        "sha256": "f52b2427c0081e0344c0090f6a0d1f135e479f8d8ffc3fe175d398916f913bba"
+      }
+    },
+    {
+      "id": "cmvwwkixi0008w8y2zw7uw5s2",
+      "name": "iPhone 14",
+      "description": "iPhone 14. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 49900,
+      "active": true,
+      "categoryId": "category-general",
+      "createdAt": "2026-10-31T21:18:05.526Z",
+      "image": {
+        "file": "e33f2b2117c5f6a7e886bad46ca1d0ce156e1ace29c72ceee478164778d51340.webp",
+        "sha256": "e33f2b2117c5f6a7e886bad46ca1d0ce156e1ace29c72ceee478164778d51340"
+      }
+    },
+    {
+      "id": "cmvwwkixt0009w8y2zwfm6nvv",
+      "name": "iPhone 14 Plus",
+      "description": "iPhone 14 Plus. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 54900,
+      "active": true,
+      "categoryId": "category-general",
+      "createdAt": "2026-10-31T21:18:05.537Z",
+      "image": {
+        "file": "a2cd5fb8e99f175250f85f6a106144c924a2747d6f9b911cc3599372e7c96aa3.webp",
+        "sha256": "a2cd5fb8e99f175250f85f6a106144c924a2747d6f9b911cc3599372e7c96aa3"
+      }
+    },
+    {
+      "id": "cmvwwkiy2000aw8y2gn893rqo",
+      "name": "iPhone 14 Pro",
+      "description": "iPhone 14 Pro. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 59900,
+      "active": true,
+      "categoryId": "category-general",
+      "createdAt": "2026-10-31T21:18:05.547Z",
+      "image": {
+        "file": "1c7d9bc96ffdbf544671be43f0255cc58c55184457541c7c817aeb4f7ac67135.webp",
+        "sha256": "1c7d9bc96ffdbf544671be43f0255cc58c55184457541c7c817aeb4f7ac67135"
+      }
+    },
+    {
+      "id": "cmvwwkiyh000bw8y2ea8rwfsi",
+      "name": "iPhone 14 Pro Max",
+      "description": "iPhone 14 Pro Max. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 64900,
+      "active": true,
+      "categoryId": "category-general",
+      "createdAt": "2026-10-31T21:18:05.561Z",
+      "image": {
+        "file": "7a8b44c8fa3f1354aff4842acbc89b7c4e49f725477a87b87b47c800ce2e9095.webp",
+        "sha256": "7a8b44c8fa3f1354aff4842acbc89b7c4e49f725477a87b87b47c800ce2e9095"
+      }
+    },
+    {
+      "id": "cmvwwkiyp000cw8y2bl92f6tv",
+      "name": "iPhone 15 Plus",
+      "description": "iPhone 15 Plus. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 64900,
+      "active": true,
+      "categoryId": "category-general",
+      "createdAt": "2026-10-31T21:18:05.569Z",
+      "image": {
+        "file": "2a4e4cd03d5eccd968e13643cc5876cbe027926bbbcb619b8ff1260faca482c6.webp",
+        "sha256": "2a4e4cd03d5eccd968e13643cc5876cbe027926bbbcb619b8ff1260faca482c6"
+      }
+    },
+    {
+      "id": "cmvwwkiyy000dw8y28wjrhpua",
+      "name": "iPhone 15 Pro",
+      "description": "iPhone 15 Pro. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 74900,
+      "active": true,
+      "categoryId": "category-general",
+      "createdAt": "2026-10-31T21:18:05.578Z",
+      "image": {
+        "file": "f0dac01898dd2556648158b854c815f4b949bb4a215b810f9931a8be5ab91363.webp",
+        "sha256": "f0dac01898dd2556648158b854c815f4b949bb4a215b810f9931a8be5ab91363"
+      }
+    },
+    {
+      "id": "cmvwwkiz4000ew8y2f6xvh1sr",
+      "name": "iPhone 15 Pro Max",
+      "description": "iPhone 15 Pro Max. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 84900,
+      "active": true,
+      "categoryId": "category-general",
+      "createdAt": "2026-10-31T21:18:05.584Z",
+      "image": {
+        "file": "de0209ba7c61e1e7fb9eacd0b650a93a57b5030c4243f329d815ca1cd3be4b76.webp",
+        "sha256": "de0209ba7c61e1e7fb9eacd0b650a93a57b5030c4243f329d815ca1cd3be4b76"
+      }
+    },
+    {
+      "id": "cmvwwkiza000fw8y2vnkbx8wj",
+      "name": "iPhone 16",
+      "description": "iPhone 16. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 69900,
+      "active": true,
+      "categoryId": "category-general",
+      "createdAt": "2026-10-31T21:18:05.591Z",
+      "image": {
+        "file": "c90a78924dfc2d262bdf6e22f0e889a23fc0e9a408810ab57652eb4ac7ae00a3.webp",
+        "sha256": "c90a78924dfc2d262bdf6e22f0e889a23fc0e9a408810ab57652eb4ac7ae00a3"
+      }
+    },
+    {
+      "id": "cmvwwkizh000gw8y21q36f82y",
+      "name": "iPhone 16 Plus",
+      "description": "iPhone 16 Plus. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 79900,
+      "active": true,
+      "categoryId": "category-general",
+      "createdAt": "2026-10-31T21:18:05.597Z",
+      "image": {
+        "file": "220af6f0b2f886670bc674012783bdeb0617505bd6216fe4ffb8d7d790b89a6a.webp",
+        "sha256": "220af6f0b2f886670bc674012783bdeb0617505bd6216fe4ffb8d7d790b89a6a"
+      }
+    },
+    {
+      "id": "cmvwwkizn000hw8y2cre3a7yu",
+      "name": "iPhone 16 Pro",
+      "description": "iPhone 16 Pro. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 89900,
+      "active": true,
+      "categoryId": "category-general",
+      "createdAt": "2026-10-31T21:18:05.603Z",
+      "image": {
+        "file": "af2ae4da29c1d2db044398c5bc14f897f611017714f47ea65fd3fc9ad8bf85e8.webp",
+        "sha256": "af2ae4da29c1d2db044398c5bc14f897f611017714f47ea65fd3fc9ad8bf85e8"
+      }
+    },
+    {
+      "id": "cmvwwkizw000iw8y2hpr5dnv0",
+      "name": "iPhone 16 Pro Max",
+      "description": "iPhone 16 Pro Max. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 99900,
+      "active": true,
+      "categoryId": "category-general",
+      "createdAt": "2026-10-31T21:18:05.612Z",
+      "image": {
+        "file": "145e6424a11cee3c2b7a6c949fb0e4a061302a148f0f7d9b1f2178f0a35097ba.webp",
+        "sha256": "145e6424a11cee3c2b7a6c949fb0e4a061302a148f0f7d9b1f2178f0a35097ba"
+      }
+    },
+    {
+      "id": "cmvwwkj0c000kw8y2tkhvk25j",
+      "name": "iPad",
+      "description": "iPad. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 34900,
+      "active": true,
+      "categoryId": "cmvwwkj04000jw8y2yyt34jn6",
+      "createdAt": "2026-10-31T21:18:05.628Z",
+      "image": {
+        "file": "decdab083e6fc51483679ab2636bdc5ee5afa67ba756b9ff1a0d8e5751ac57c2.webp",
+        "sha256": "decdab083e6fc51483679ab2636bdc5ee5afa67ba756b9ff1a0d8e5751ac57c2"
+      }
+    },
+    {
+      "id": "cmvwwkj0i000lw8y2xf685xas",
+      "name": "iPad mini",
+      "description": "iPad mini. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 44900,
+      "active": true,
+      "categoryId": "cmvwwkj04000jw8y2yyt34jn6",
+      "createdAt": "2026-10-31T21:18:05.634Z",
+      "image": {
+        "file": "5af46a88cd8d0df6a925d417411a3ff4c75c18b1f7f7b469d86424cf5f4496b7.webp",
+        "sha256": "5af46a88cd8d0df6a925d417411a3ff4c75c18b1f7f7b469d86424cf5f4496b7"
+      }
+    },
+    {
+      "id": "cmvwwkj0p000mw8y2gjbp4lfo",
+      "name": "iPad Air",
+      "description": "iPad Air. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 59900,
+      "active": true,
+      "categoryId": "cmvwwkj04000jw8y2yyt34jn6",
+      "createdAt": "2026-10-31T21:18:05.641Z",
+      "image": {
+        "file": "c524e17d878828d66574373ddd4632a5ed6416ba2bb88df09cfa4242703df37d.webp",
+        "sha256": "c524e17d878828d66574373ddd4632a5ed6416ba2bb88df09cfa4242703df37d"
+      }
+    },
+    {
+      "id": "cmvwwkj0x000nw8y2foyn2r2x",
+      "name": "iPad Pro",
+      "description": "iPad Pro. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 99900,
+      "active": true,
+      "categoryId": "cmvwwkj04000jw8y2yyt34jn6",
+      "createdAt": "2026-10-31T21:18:05.649Z",
+      "image": {
+        "file": "0faa565f460891d0213aace5c77f959427419aa1fce6fb7f5040233cfa7ef827.webp",
+        "sha256": "0faa565f460891d0213aace5c77f959427419aa1fce6fb7f5040233cfa7ef827"
+      }
+    },
+    {
+      "id": "cmvwwkj15000ow8y2mrlr9nzs",
+      "name": "MacBook Air 13",
+      "description": "MacBook Air 13. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 99900,
+      "active": true,
+      "categoryId": "cmvvmnpzm0001txy2q4m5apn5",
+      "createdAt": "2026-10-31T21:18:05.657Z",
+      "image": {
+        "file": "3a6d3415a3d495c2f909fca3f6a71de4056ee6c0cb4e5a8da00b5d6eb3cd5bb5.webp",
+        "sha256": "3a6d3415a3d495c2f909fca3f6a71de4056ee6c0cb4e5a8da00b5d6eb3cd5bb5"
+      }
+    },
+    {
+      "id": "cmvwwkj1c000pw8y2onvlet8j",
+      "name": "MacBook Air 15",
+      "description": "MacBook Air 15. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 119900,
+      "active": true,
+      "categoryId": "cmvvmnpzm0001txy2q4m5apn5",
+      "createdAt": "2026-10-31T21:18:05.664Z",
+      "image": {
+        "file": "3a6d3415a3d495c2f909fca3f6a71de4056ee6c0cb4e5a8da00b5d6eb3cd5bb5.webp",
+        "sha256": "3a6d3415a3d495c2f909fca3f6a71de4056ee6c0cb4e5a8da00b5d6eb3cd5bb5"
+      }
+    },
+    {
+      "id": "cmvwwkj1j000qw8y27tfcsyeu",
+      "name": "MacBook Pro 14",
+      "description": "MacBook Pro 14. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 159900,
+      "active": true,
+      "categoryId": "cmvvmnpzm0001txy2q4m5apn5",
+      "createdAt": "2026-10-31T21:18:05.671Z",
+      "image": {
+        "file": "18eaf1030db0a8fb0691ca1e0a2f30b97aeba9e9aca4b947a331f304d29fe886.webp",
+        "sha256": "18eaf1030db0a8fb0691ca1e0a2f30b97aeba9e9aca4b947a331f304d29fe886"
+      }
+    },
+    {
+      "id": "cmvwwkj1r000rw8y2tl04u9ws",
+      "name": "Mac mini",
+      "description": "Mac mini. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 59900,
+      "active": true,
+      "categoryId": "cmvvmnpzm0001txy2q4m5apn5",
+      "createdAt": "2026-10-31T21:18:05.679Z",
+      "image": {
+        "file": "23e67588714671966f92978919c1d9a4651c8251d343c3b1fa012b5a02fcaf8d.webp",
+        "sha256": "23e67588714671966f92978919c1d9a4651c8251d343c3b1fa012b5a02fcaf8d"
+      }
+    },
+    {
+      "id": "cmvwwkj2a000tw8y2t48cqqqo",
+      "name": "AirPods 3",
+      "description": "AirPods 3. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 12900,
+      "active": true,
+      "categoryId": "cmvwwkj1z000sw8y2984yv0bb",
+      "createdAt": "2026-10-31T21:18:05.698Z",
+      "image": {
+        "file": "70d14b15be0590b6a6fe901076d85e007399639a244c7cba2378ba762ed5c607.webp",
+        "sha256": "70d14b15be0590b6a6fe901076d85e007399639a244c7cba2378ba762ed5c607"
+      }
+    },
+    {
+      "id": "cmvwwkj2l000uw8y2el4a3ru6",
+      "name": "AirPods 4",
+      "description": "AirPods 4. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 14900,
+      "active": true,
+      "categoryId": "cmvwwkj1z000sw8y2984yv0bb",
+      "createdAt": "2026-10-31T21:18:05.709Z",
+      "image": {
+        "file": "0d9a2c651d2577eee43220e1f9908c8ee9afa79a5e03370ff6ae276d4d7dac98.webp",
+        "sha256": "0d9a2c651d2577eee43220e1f9908c8ee9afa79a5e03370ff6ae276d4d7dac98"
+      }
+    },
+    {
+      "id": "cmvwwkj2x000vw8y24beafp3p",
+      "name": "AirPods Pro 2",
+      "description": "AirPods Pro 2. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 19900,
+      "active": true,
+      "categoryId": "cmvwwkj1z000sw8y2984yv0bb",
+      "createdAt": "2026-10-31T21:18:05.721Z",
+      "image": {
+        "file": "c67e021c96e599a212493c53100b01d9c0828dfcf4c52cf846605e7f4f54b2e7.webp",
+        "sha256": "c67e021c96e599a212493c53100b01d9c0828dfcf4c52cf846605e7f4f54b2e7"
+      }
+    },
+    {
+      "id": "cmvwwkj38000ww8y23o2kj20e",
+      "name": "AirPods Max",
+      "description": "AirPods Max. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 49900,
+      "active": true,
+      "categoryId": "cmvwwkj1z000sw8y2984yv0bb",
+      "createdAt": "2026-10-31T21:18:05.732Z",
+      "image": {
+        "file": "245a5d178ebcbf8187fc9a21f43971aaf1d9a817b768c454428b344d2d920d8f.webp",
+        "sha256": "245a5d178ebcbf8187fc9a21f43971aaf1d9a817b768c454428b344d2d920d8f"
+      }
+    },
+    {
+      "id": "cmvwwkj3m000xw8y2s1p7e32a",
+      "name": "Cargador USB-C 20 W",
+      "description": "Cargador USB-C 20 W. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 2500,
+      "active": true,
+      "categoryId": "cmvvm89u60000txy20go8293g",
+      "createdAt": "2026-10-31T21:18:05.746Z",
+      "image": {
+        "file": "1edd9ef58c378c51e581de6842d782c2a2fb53ba7c6b3e317288019276f19286.webp",
+        "sha256": "1edd9ef58c378c51e581de6842d782c2a2fb53ba7c6b3e317288019276f19286"
+      }
+    },
+    {
+      "id": "cmvwwkj3z000yw8y2ievucifu",
+      "name": "Cable USB-C de 1 metro",
+      "description": "Cable USB-C de 1 metro. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 1500,
+      "active": true,
+      "categoryId": "cmvvm89u60000txy20go8293g",
+      "createdAt": "2026-10-31T21:18:05.759Z",
+      "image": {
+        "file": "decd58340d9f88e0ec90e032f41c2ac65bbb422127667eb1cde597b6634bad87.webp",
+        "sha256": "decd58340d9f88e0ec90e032f41c2ac65bbb422127667eb1cde597b6634bad87"
+      }
+    },
+    {
+      "id": "cmvwwkj49000zw8y27no2a4ho",
+      "name": "Cargador MagSafe",
+      "description": "Cargador MagSafe. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 3900,
+      "active": true,
+      "categoryId": "cmvvm89u60000txy20go8293g",
+      "createdAt": "2026-10-31T21:18:05.769Z",
+      "image": {
+        "file": "fce62d26748e2c778284cf327107896ad009d0bd190b77aaa6bbd68002c91a0b.webp",
+        "sha256": "fce62d26748e2c778284cf327107896ad009d0bd190b77aaa6bbd68002c91a0b"
+      }
+    },
+    {
+      "id": "cmvwwkj4h0010w8y2rzynha4h",
+      "name": "Funda transparente para iPhone 15",
+      "description": "Funda transparente para iPhone 15. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "priceCents": 1900,
+      "active": true,
+      "categoryId": "cmvvm89u60000txy20go8293g",
+      "createdAt": "2026-10-31T21:18:05.777Z",
+      "image": {
+        "file": "ad5b518d4877319c3fc003ffafa105566cf0aca9b8af747b71f296e33adcfdec.webp",
+        "sha256": "ad5b518d4877319c3fc003ffafa105566cf0aca9b8af747b71f296e33adcfdec"
+      }
+    }
+  ]
+}

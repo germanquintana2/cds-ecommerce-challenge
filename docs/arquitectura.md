@@ -1,15 +1,17 @@
 # Arquitectura y modelo de datos
 
-Diseño objetivo para la implementación. El esquema Prisma y sus restricciones SQL ya están implementados; los módulos de producto, carrito y pagos se construirán sobre esa base.
+Arquitectura implementada. Actualización: 31 de octubre de 2026.
 
 ## Estructura
 
 ```text
 src/
   app/
-    (public)/                 Catálogo, detalle, login y registro
-    (authenticated)/          Carrito, resultado de checkout y órdenes
-    admin/                    Panel con validación de rol en servidor
+    (auth)/                  Login y registro, sin layout de tienda
+    (store)/                 Header, menú móvil, sidebar y panel de carrito
+      (public)/              Inicio de categorías y detalle de productos
+      (authenticated)/       Perfil, resultado de checkout y órdenes propias
+      admin/                 Productos y categorías con autorización ADMIN
     api/
       auth/[...all]/          Better Auth existente
       trpc/[trpc]/            API existente
@@ -19,7 +21,7 @@ src/
   lib/                       Auth, Prisma, clientes y utilidades existentes
   server/
     api/routers/              Procedimientos de catálogo, administración, carrito y órdenes
-    services/payments/        Confirmación transaccional e idempotente de pagos
+    payments/        Confirmación transaccional e idempotente de pagos
     integrations/             Clientes de Stripe y S3, exclusivos del servidor
     validation/               Esquemas Zod compartidos cuando corresponde
     db/prisma/                Esquema y migraciones existentes
@@ -31,26 +33,27 @@ El proxy sirve para redirecciones de navegación; la cookie por sí sola no auto
 
 ## Acceso a datos y excepción para Stripe
 
-Se conserva la convención de consultar Prisma dentro de procedimientos tRPC. La única excepción de negocio será el servicio de confirmación de pagos, exclusivo del servidor, invocado por el handler de Stripe después de verificar la firma. Allí debe realizarse la transacción atómica de orden, ítems, intento y carrito.
+Se conserva la convención de consultar Prisma dentro de procedimientos tRPC. La excepción de negocio es el servicio de confirmación de pagos, exclusivo del servidor, invocado por el handler de Stripe después de verificar la firma. Allí se realiza la transacción atómica de orden, ítems, intento y carrito.
 
 Este servicio no se registra como procedimiento público ni recibe un indicador `isPaid` desde el frontend. Los componentes de interfaz nunca consultan Prisma directamente. Better Auth y el comando de datos iniciales mantienen el acceso que requieren para autenticar y preparar el entorno.
 
 ## Modelo
 
-Se conservan User, Session, Account y Verification de Better Auth. Se agrega el rol a User y se reemplaza el ejemplo ToDoItem durante la implementación.
+Se conservan User, Session, Account y Verification de Better Auth. User incorpora el rol CUSTOMER/ADMIN. La tabla heredada ToDoItem permanece sin rutas ni uso en la tienda.
 
-| Entidad         | Campos principales                                                                                                                                 | Restricciones e índices                                                                          |
-| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| User            | Campos existentes, role                                                                                                                            | role por defecto CUSTOMER, no editable desde registro; email único existente                     |
-| Product         | id, name, description, priceCents, imageKey, active, createdAt, updatedAt                                                                          | Precio entero positivo, nombre y descripción no vacíos; desactivación en lugar de borrado físico |
-| Cart            | id, userId, version, createdAt, updatedAt                                                                                                          | userId único; version entero que aumenta con cada modificación                                   |
-| CartItem        | id, cartId, productId, quantity                                                                                                                    | Único por cartId/productId; cantidad de 1 a 99                                                   |
-| CheckoutAttempt | id, userId, cartId, cartVersion, requestKey, status, currency, totalCents, stripeSessionId, stripePaymentIntentId, expiresAt, createdAt, updatedAt | Único por userId/requestKey; stripeSessionId y stripePaymentIntentId únicos cuando existen       |
-| CheckoutItem    | id, checkoutAttemptId, productId, productName, unitPriceCents, quantity                                                                            | Único por checkoutAttemptId/productId; snapshot inmutable                                        |
-| Order           | id, userId, checkoutAttemptId, status, currency, totalCents, paidAt, createdAt                                                                     | checkoutAttemptId único; índice userId/createdAt para historial                                  |
-| OrderItem       | id, orderId, productId, productName, unitPriceCents, quantity                                                                                      | Único por orderId/productId; snapshot inmutable                                                  |
+| Entidad         | Campos principales                                                                                                                                 | Restricciones e índices                                                                                        |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| User            | Campos existentes, role                                                                                                                            | role por defecto CUSTOMER, no editable desde registro; email único existente                                   |
+| Category        | id, name, imageKey, createdAt, updatedAt                                                                                                           | Nombre único sin distinguir mayúsculas; portada opcional; productos desasignados al eliminar                   |
+| Product         | id, name, description, priceCents, imageKey, active, categoryId, deletedAt, createdAt, updatedAt                                                   | Precio entero positivo, nombre y descripción no vacíos; baja lógica mediante deletedAt, sin destruir historial |
+| Cart            | id, userId, version, createdAt, updatedAt                                                                                                          | userId único; version entero que aumenta con cada modificación                                                 |
+| CartItem        | id, cartId, productId, quantity                                                                                                                    | Único por cartId/productId; cantidad de 1 a 99                                                                 |
+| CheckoutAttempt | id, userId, cartId, cartVersion, requestKey, status, currency, totalCents, stripeSessionId, stripePaymentIntentId, expiresAt, createdAt, updatedAt | Único por userId/requestKey; stripeSessionId y stripePaymentIntentId únicos cuando existen                     |
+| CheckoutItem    | id, checkoutAttemptId, productId, productName, unitPriceCents, quantity                                                                            | Único por checkoutAttemptId/productId; snapshot inmutable                                                      |
+| Order           | id, userId, checkoutAttemptId, status, currency, totalCents, paidAt, createdAt                                                                     | checkoutAttemptId único; índice userId/createdAt para historial                                                |
+| OrderItem       | id, orderId, productId, productName, unitPriceCents, quantity                                                                                      | Único por orderId/productId; snapshot inmutable                                                                |
 
-`imageKey` guarda una referencia como `products/<uuid>.webp`, no una URL temporal. Se exige una imagen para publicar un producto activo. Los ítems históricos conservan nombre y precio, sin depender de imágenes que pueden reemplazarse.
+`imageKey` guarda una referencia como `products/<productId>/<uuid>.webp`, no una URL temporal. Se exige una imagen para publicar un producto activo. Los ítems históricos conservan nombre y precio, sin depender de imágenes que pueden reemplazarse.
 
 Los identificadores son opacos. Las tablas nuevas siguen las convenciones Prisma de la plantilla. Las cantidades, precios y totales se validan en servidor y se respaldan con restricciones CHECK de PostgreSQL en las migraciones. Se limita el total a un rango admitido por los enteros elegidos y por Stripe; se rechaza el exceso antes de crear la sesión.
 
@@ -58,6 +61,7 @@ Las órdenes y sus snapshots no se borran al editar productos. No se agrega elim
 
 ```mermaid
 erDiagram
+    Category |o--o{ Product : agrupa
     User ||--o| Cart : tiene
     Cart ||--o{ CartItem : contiene
     Product ||--o{ CartItem : referencia
@@ -85,15 +89,15 @@ Rechazar una tarjeta no vuelve FAILED al intento: Stripe puede permitir que el u
 
 ## Operaciones
 
-| Módulo           | Operaciones propuestas                | Protección                                                   |
-| ---------------- | ------------------------------------- | ------------------------------------------------------------ |
-| catalog          | list, byId                            | Solo productos activos; búsqueda y paginación con límites    |
-| adminProduct     | list, create, update, setActive       | adminProcedure con rol actual validado                       |
-| cart             | get, addItem, setQuantity, removeItem | protectedProcedure; usuario derivado de sesión               |
-| checkout         | start, byId                           | protectedProcedure; intento propio y precios recalculados    |
-| order            | list, byId                            | protectedProcedure; filtro por userId de sesión              |
-| uploads/products | POST multipart                        | Sesión ADMIN, tipo real, tamaño y clave generada en servidor |
-| webhooks/stripe  | POST cuerpo sin transformar           | Firma Stripe válida y entorno de pruebas verificado          |
+| Módulo           | Operaciones implementadas                                  | Protección                                                   |
+| ---------------- | ---------------------------------------------------------- | ------------------------------------------------------------ |
+| catalog          | list, byId, suggestions                                    | Solo productos activos; búsqueda y paginación con límites    |
+| adminProduct     | list, byId, create, update, setActive, attachImage, remove | adminProcedure con rol actual validado                       |
+| cart             | get, count, addItem, setQuantity, removeItem               | protectedProcedure; usuario derivado de sesión               |
+| checkout         | start, byId                                                | protectedProcedure; intento propio y precios recalculados    |
+| order            | list, byId, suggestions                                    | protectedProcedure; filtro por userId de sesión              |
+| uploads/products | POST multipart                                             | Sesión ADMIN, tipo real, tamaño y clave generada en servidor |
+| webhooks/stripe  | POST cuerpo sin transformar                                | Firma Stripe válida y entorno de pruebas verificado          |
 
 Las consultas ajenas de órdenes o intentos devolverán NOT_FOUND. No se acepta userId del navegador para decidir el propietario. Los errores de entrada son BAD_REQUEST, sesión ausente UNAUTHORIZED, rol insuficiente FORBIDDEN y carrito/precios cambiados CONFLICT.
 
@@ -119,8 +123,16 @@ La clave de idempotencia evita duplicar una misma operación reintentada. Dos co
 
 No se agrega una cola para este volumen: el procesamiento consiste en una consulta corta a Stripe y una transacción breve. No se guardan datos de tarjeta ni claves en la base de datos.
 
-## Referencias para implementar pagos
+## Referencias de pagos
 
 - [Webhooks, firma y cuerpo original](https://docs.stripe.com/webhooks).
 - [Claves de idempotencia y su retención](https://docs.stripe.com/api/idempotent_requests).
 - [Configuración local de Stripe](stripe.md).
+
+## Categorías y navegación
+
+`category.list` devuelve páginas de 20 categorías, portada propia o de producto activo y cantidad de productos. `category.navigation` devuelve los enlaces del sidebar sin paginar. `adminCategory` gestiona nombre, portada, asignaciones y eliminación. Quitar un producto lo deja sin categoría; eliminar la categoría no elimina ni desactiva sus productos. Las compras conservan los snapshots.
+
+Las búsquedas de productos calculan primero el conjunto cuyo nombre empieza con la consulta y después las coincidencias internas. El catálogo pagina ambos conjuntos en ese orden, sin duplicados; las sugerencias completan hasta cuatro opciones. Los borradores y las bajas lógicas se excluyen de todas las lecturas públicas.
+
+La subida de portadas usa `POST /api/uploads/categories`. Los archivos se validan y convierten a WebP antes de guardarse en S3. La referencia completa de procedimientos y handlers está en [api.md](api.md).

@@ -10,7 +10,8 @@ import { createQueryClient } from "~/lib/trpc/query-client";
 
 export const api = createTRPCReact<AppRouter>();
 
-let clientQueryClientSingleton: ReturnType<typeof createQueryClient> | undefined;
+let clientQueryClientSingleton:
+  ReturnType<typeof createQueryClient> | undefined;
 
 const getQueryClient = () => {
   if (typeof window === "undefined") {
@@ -22,7 +23,7 @@ const getQueryClient = () => {
 
 function getBaseUrl() {
   if (typeof window !== "undefined") return "";
-  return `http://localhost:${process.env.PORT ?? 3000}`;
+  return `http://localhost:${process.env.PORT ?? 3100}`;
 }
 
 export function TRPCReactProvider(props: { children: ReactNode }) {

@@ -20,6 +20,7 @@ if (migration.exitCode !== 0) {
 const { auth } = await import("../../src/lib/auth");
 const { prisma } = await import("../../src/lib/prisma");
 const { adminRouter } = await import("../../src/server/api/routers/admin");
+const { orderRouter } = await import("../../src/server/api/routers/order");
 const origin = process.env.BETTER_AUTH_URL;
 const password = randomUUID() + randomUUID();
 const userIds = [];
@@ -254,6 +255,25 @@ describe("database business constraints", () => {
     expect(historical.totalCents).toBe(200);
     expect(historical.items[0].productName).toBe("Original name");
     expect(historical.items[0].unitPriceCents).toBe(100);
+    const orderCaller = (session) =>
+      orderRouter.createCaller({ db: prisma, session, headers: new Headers() });
+    const purchases = await orderCaller({ user: { id: user.id } }).list({
+      page: 1,
+    });
+    expect(purchases.total).toBe(1);
+    expect(purchases.items[0].items[0].productName).toBe("Original name");
+    expect(
+      (
+        await orderCaller({ user: { id: randomUUID() } }).list({
+          page: 1,
+          userId: user.id,
+        })
+      ).items,
+    ).toEqual([]);
+    await expect(orderCaller(null).list({ page: 1 })).rejects.toMatchObject({
+      code: "UNAUTHORIZED",
+    });
+
     await expect(
       Promise.resolve(prisma.product.delete({ where: { id: productId } })),
     ).rejects.toMatchObject({ code: "P2003" });
