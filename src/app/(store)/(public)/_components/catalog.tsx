@@ -1,4 +1,5 @@
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ListPagination } from "~/app/_components/list-pagination";
+import { ArrowLeft } from "lucide-react";
 import { Button } from "~/components/ui/button";
 import { CategoryGrid } from "./category-grid";
 import { notFound, redirect } from "next/navigation";
@@ -127,43 +128,14 @@ export async function Catalog({
           </p>
         </div>
       )}
-      <footer className="flex flex-wrap items-center justify-between gap-4 text-sm">
-        <p>
-          {result.total} productos · Página {result.page} de {result.pages}
-        </p>
-        <nav aria-label="Páginas del catálogo" className="flex gap-3">
-          {page > 1 ? (
-            <Button
-              variant="outline"
-              nativeButton={false}
-              render={<Link href={pageUrl(page - 1)} />}
-            >
-              <ArrowLeft data-icon="inline-start" aria-hidden="true" />
-              Atrás
-            </Button>
-          ) : (
-            <Button variant="outline" disabled>
-              <ArrowLeft data-icon="inline-start" aria-hidden="true" />
-              Atrás
-            </Button>
-          )}
-          {page < result.pages ? (
-            <Button
-              variant="outline"
-              nativeButton={false}
-              render={<Link href={pageUrl(page + 1)} />}
-            >
-              Adelante
-              <ArrowRight data-icon="inline-end" aria-hidden="true" />
-            </Button>
-          ) : (
-            <Button variant="outline" disabled>
-              Adelante
-              <ArrowRight data-icon="inline-end" aria-hidden="true" />
-            </Button>
-          )}
-        </nav>
-      </footer>
+      <ListPagination
+        total={result.total}
+        label="productos"
+        page={page}
+        pages={result.pages}
+        pageUrl={pageUrl}
+        ariaLabel="Páginas del catálogo"
+      />
     </main>
   );
 }

@@ -12,7 +12,9 @@ try {
     error instanceof Error ? error.name : "UnknownError",
   );
   console.error(
-    "Revisá AWS_PROFILE, AWS_REGION, S3_BUCKET_NAME y renová la sesión de tu perfil. Volvé a ejecutar setup después de autenticarte.",
+    process.env.CDS_MANAGED_DOCKER === "1"
+      ? "Autenticá AWS con docker compose run --rm aws login --remote y volvé a ejecutar docker compose up. Revisá también región, perfil, bucket y permisos."
+      : "Revisá AWS_PROFILE, AWS_REGION, S3_BUCKET_NAME y renová la sesión de tu perfil. Volvé a ejecutar setup después de autenticarte.",
   );
   process.exitCode = 1;
 } finally {

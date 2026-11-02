@@ -37,7 +37,9 @@ export function MobileCategoryMenu({ children }: { children: ReactNode }) {
       </SheetTrigger>
       <SheetContent side="left" className="w-80 max-w-[85vw]">
         <SheetHeader>
-          <SheetTitle>Categorías</SheetTitle>
+          <SheetTitle className="text-base font-semibold tracking-tight sm:text-xl">
+            CDS · Tienda
+          </SheetTitle>
         </SheetHeader>
         <div
           className="min-h-0 flex-1 overflow-y-auto px-3 pb-4"

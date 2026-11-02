@@ -7,7 +7,7 @@ Guía de la implementación actual. Se crearon/editaron productos y se cargaron 
 - Docker debe estar ejecutando PostgreSQL y Next.js debe estar disponible en http://localhost:3100.
 - Iniciar sesión con `ADMIN_EMAIL` y `ADMIN_PASSWORD` del `.env` local. No compartir esos valores por chat ni capturas.
 - Abrir http://localhost:3100/admin/products. `/admin` ahora redirige a esa página.
-- Tener una imagen JPEG, PNG o WebP de menos de 5 MB y 16 megapíxeles.
+- Tener una imagen JPEG, PNG o WebP de menos de 4 MB y 16 megapíxeles.
 
 ## Recorrido principal
 
@@ -28,7 +28,7 @@ El catálogo público está en `/` (categorías y productos por categoría); `/p
 | Caso                                                                         | Resultado esperado                                                                                        |
 | ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
 | Nombre o descripción vacíos, precio `0`, negativo o con más de dos decimales | No se guarda y se muestra un error                                                                        |
-| Imagen mayor a 5 MB o con tipo no admitido                                   | Se rechaza y se informa el problema                                                                       |
+| Imagen mayor a 4 MB o con tipo no admitido                                   | Se rechaza y se informa el problema                                                                       |
 | Archivo de texto renombrado a `.png`                                         | El servidor rechaza el contenido aunque la extensión parezca válida                                       |
 | Imagen de más de 16 megapíxeles o animada                                    | El servidor la rechaza                                                                                    |
 | Error de subida al crear un producto                                         | Se informa el error y se conserva el borrador; reintentar desde el mismo formulario no crea otro producto |

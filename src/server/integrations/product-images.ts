@@ -1,4 +1,26 @@
 import "server-only";
+import { put, head, del } from "@vercel/blob";
+
+const usesBlob = process.env.IMAGE_STORAGE_PROVIDER === "vercel-blob";
+function blobUrl(key: string) {
+  const base = process.env.BLOB_PUBLIC_BASE_URL;
+  if (
+    !base ||
+    !/^https:\/\/[a-z0-9]+\.public\.blob\.vercel-storage\.com$/.test(base)
+  )
+    throw new Error("Blob no está configurado.");
+  return `${base}/${key.split("/").map(encodeURIComponent).join("/")}`;
+}
+async function verifyBlob(key: string) {
+  const object = await head(blobUrl(key));
+  return (
+    object.pathname === key &&
+    object.contentType === "image/webp" &&
+    object.size > 0 &&
+    object.size <= MAX_IMAGE_BYTES
+  );
+}
+import { awsCredentialsProvider } from "@vercel/oidc-aws-credentials-provider";
 import { randomUUID } from "node:crypto";
 import sharp from "sharp";
 import {
@@ -11,7 +33,17 @@ import {
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { MAX_IMAGE_BYTES } from "~/server/validation/product";
 
-const client = new S3Client({ region: process.env.AWS_REGION, maxAttempts: 2 });
+const client = new S3Client({
+  region: process.env.AWS_REGION,
+  maxAttempts: 2,
+  ...(process.env.VERCEL && process.env.AWS_ROLE_ARN
+    ? {
+        credentials: awsCredentialsProvider({
+          roleArn: process.env.AWS_ROLE_ARN,
+        }),
+      }
+    : {}),
+});
 
 function bucket() {
   const name = process.env.S3_BUCKET_NAME;
@@ -42,7 +74,7 @@ async function uploadImage(
   };
   if (!formats[file.type] || file.size === 0 || file.size > MAX_IMAGE_BYTES) {
     throw new ImageValidationError(
-      "Elegí una imagen JPEG, PNG o WebP de hasta 5 MB.",
+      "Elegí una imagen JPEG, PNG o WebP de hasta 4 MB.",
     );
   }
 
@@ -75,6 +107,14 @@ async function uploadImage(
   }
 
   const key = `${namespace}/${entityId}/${randomUUID()}.webp`;
+  if (usesBlob) {
+    await put(key, body, {
+      access: "public",
+      addRandomSuffix: false,
+      contentType: "image/webp",
+    });
+    return key;
+  }
   await client.send(
     new PutObjectCommand({
       Bucket: bucket(),
@@ -93,6 +133,7 @@ async function uploadImage(
 
 export async function verifyProductImage(productId: string, key: string) {
   if (!key.startsWith(`products/${productId}/`)) return false;
+  if (usesBlob) return verifyBlob(key);
   const object = await client.send(
     new HeadObjectCommand({ Bucket: bucket(), Key: key }),
   );
@@ -106,6 +147,7 @@ export async function verifyProductImage(productId: string, key: string) {
 
 export async function productImageUrl(key: string | null) {
   if (!key) return null;
+  if (usesBlob) return blobUrl(key);
   return getSignedUrl(
     client,
     new GetObjectCommand({ Bucket: bucket(), Key: key }),
@@ -114,6 +156,10 @@ export async function productImageUrl(key: string | null) {
 }
 
 export async function deleteProductImage(key: string) {
+  if (usesBlob) {
+    await del(blobUrl(key));
+    return;
+  }
   await client.send(new DeleteObjectCommand({ Bucket: bucket(), Key: key }));
 }
 
@@ -136,6 +182,7 @@ export async function safeProductImageUrl(key: string | null) {
 
 export async function verifyCategoryImage(categoryId: string, key: string) {
   if (!key.startsWith(`categories/${categoryId}/`)) return false;
+  if (usesBlob) return verifyBlob(key);
   const object = await client.send(
     new HeadObjectCommand({ Bucket: bucket(), Key: key }),
   );

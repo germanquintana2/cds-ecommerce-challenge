@@ -1,3 +1,4 @@
+import { ListPagination } from "~/app/_components/list-pagination";
 import { loginPath } from "~/lib/return-path";
 import Link from "next/link";
 import { format } from "date-fns";
@@ -86,20 +87,14 @@ export async function OrderList({
           </p>
         </section>
       )}
-      {page > 1 || page < result.pages ? (
-        <nav aria-label="Páginas de compras" className="flex gap-4 text-sm">
-          {page > 1 ? (
-            <Link className="underline" href={`/orders?page=${page - 1}`}>
-              Anterior
-            </Link>
-          ) : null}
-          {page < result.pages ? (
-            <Link className="underline" href={`/orders?page=${page + 1}`}>
-              Siguiente
-            </Link>
-          ) : null}
-        </nav>
-      ) : null}
+      <ListPagination
+        total={result.total}
+        label="compras"
+        page={page}
+        pages={result.pages}
+        pageUrl={(number) => `/orders?page=${number}`}
+        ariaLabel="Páginas de compras"
+      />
     </div>
   );
 }

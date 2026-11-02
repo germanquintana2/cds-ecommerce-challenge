@@ -1,7 +1,6 @@
+import { ListPagination } from "~/app/_components/list-pagination";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import { Button } from "~/components/ui/button";
 import Image from "next/image";
 import { api } from "~/lib/trpc/server";
 export async function CategoryGrid({ page = 1 }: { page?: number }) {
@@ -59,46 +58,14 @@ export async function CategoryGrid({ page = 1 }: { page?: number }) {
           Todavía no hay categorías disponibles.
         </p>
       ) : null}
-      <footer className="flex items-center justify-between gap-2 text-xs sm:gap-4 sm:text-sm">
-        <p>
-          {result.total} categorías · Página {page} de {result.pages}
-        </p>
-        <nav
-          aria-label="Páginas de categorías"
-          className="flex shrink-0 gap-2 sm:gap-3"
-        >
-          {page > 1 ? (
-            <Button
-              variant="outline"
-              nativeButton={false}
-              render={<Link href={`/?page=${page - 1}`} />}
-            >
-              <ArrowLeft data-icon="inline-start" aria-hidden="true" />
-              <span className="sr-only sm:not-sr-only">Atrás</span>
-            </Button>
-          ) : (
-            <Button variant="outline" disabled>
-              <ArrowLeft data-icon="inline-start" aria-hidden="true" />
-              <span className="sr-only sm:not-sr-only">Atrás</span>
-            </Button>
-          )}
-          {page < result.pages ? (
-            <Button
-              variant="outline"
-              nativeButton={false}
-              render={<Link href={`/?page=${page + 1}`} />}
-            >
-              <span className="sr-only sm:not-sr-only">Adelante</span>
-              <ArrowRight data-icon="inline-end" aria-hidden="true" />
-            </Button>
-          ) : (
-            <Button variant="outline" disabled>
-              <span className="sr-only sm:not-sr-only">Adelante</span>
-              <ArrowRight data-icon="inline-end" aria-hidden="true" />
-            </Button>
-          )}
-        </nav>
-      </footer>
+      <ListPagination
+        total={result.total}
+        label="categorías"
+        page={page}
+        pages={result.pages}
+        pageUrl={(number) => `/?page=${number}`}
+        ariaLabel="Páginas de categorías"
+      />
     </main>
   );
 }

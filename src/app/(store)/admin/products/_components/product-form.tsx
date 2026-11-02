@@ -80,7 +80,7 @@ export function ProductForm({ initial }: { initial?: InitialProduct }) {
       selected.size > MAX_IMAGE_BYTES ||
       !selected.size
     ) {
-      setImageError("Elegí una imagen JPEG, PNG o WebP de hasta 5 MB.");
+      setImageError("Elegí una imagen JPEG, PNG o WebP de hasta 4 MB.");
       setFile(null);
       if (fileInput.current) fileInput.current.value = "";
       if (localUrl.current) URL.revokeObjectURL(localUrl.current);
@@ -255,7 +255,7 @@ export function ProductForm({ initial }: { initial?: InitialProduct }) {
           errorMessage={imageError ?? undefined}
         />
         <p id="image-help" className="text-sm text-muted-foreground">
-          JPEG, PNG o WebP, hasta 5 MB y 16 megapíxeles. Se convertirá a WebP.
+          JPEG, PNG o WebP, hasta 4 MB y 16 megapíxeles. Se convertirá a WebP.
         </p>
         {preview ? (
           <Image

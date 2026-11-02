@@ -44,7 +44,7 @@
     {
       "id": "cmvqyg47u0000lgi7g8hyh0k8",
       "name": "Iphone 18 pro",
-      "description": "celular de la marca apple",
+      "description": "Un teléfono para mantenerte conectado, organizar tus tareas y disfrutar de tus contenidos favoritos. Una opción del catálogo para quienes buscan una experiencia de uso versátil en el día a día.",
       "priceCents": 110000,
       "active": true,
       "categoryId": "category-general",
@@ -57,7 +57,7 @@
     {
       "id": "cmvvdjip3000f68i7f6rt7ak0",
       "name": "sticker",
-      "description": "adhesivo",
+      "description": "Adhesivo con el logo de Apple para personalizar tu notebook, cuaderno o accesorios y darles un detalle distintivo.",
       "priceCents": 50,
       "active": true,
       "categoryId": "cmvvm89u60000txy20go8293g",
@@ -70,7 +70,7 @@
     {
       "id": "cmvvldp8o0004gky2dy7lm8eu",
       "name": "Iphone 11 Pro",
-      "description": "Celular de la marca Apple",
+      "description": "Un iPhone de formato cómodo para comunicarte, capturar momentos y llevar tus aplicaciones favoritas a todas partes. Una alternativa para el uso cotidiano.",
       "priceCents": 50000,
       "active": true,
       "categoryId": "category-general",
@@ -83,7 +83,7 @@
     {
       "id": "cmvwwkivn0000w8y27qbqonsk",
       "name": "iPhone 12",
-      "description": "iPhone 12. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Un teléfono versátil para mensajes, fotos, videollamadas y entretenimiento. Su diseño de bordes rectos combina un estilo definido con un formato cómodo para todos los días.",
       "priceCents": 29900,
       "active": true,
       "categoryId": "category-general",
@@ -96,7 +96,7 @@
     {
       "id": "cmvwwkiw00001w8y2wbsfkqjs",
       "name": "iPhone 12 mini",
-      "description": "iPhone 12 mini. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "La experiencia del iPhone 12 en un formato compacto, fácil de llevar y usar con una mano. Pensado para quienes prefieren un teléfono pequeño para sus actividades diarias.",
       "priceCents": 27900,
       "active": true,
       "categoryId": "category-general",
@@ -109,7 +109,7 @@
     {
       "id": "cmvwwkiwa0002w8y2pt7lnfyu",
       "name": "iPhone 12 Pro",
-      "description": "iPhone 12 Pro. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Un iPhone orientado a quienes disfrutan de la fotografía y buscan un acabado cuidado. Combina herramientas para capturar recuerdos con una experiencia versátil para trabajar y entretenerse.",
       "priceCents": 34900,
       "active": true,
       "categoryId": "category-general",
@@ -122,7 +122,7 @@
     {
       "id": "cmvwwkiwi0003w8y29ukef76l",
       "name": "iPhone 12 Pro Max",
-      "description": "iPhone 12 Pro Max. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Una alternativa de mayor tamaño dentro de la familia iPhone 12 Pro. Su formato amplio resulta cómodo para ver videos, revisar fotos y trabajar con tus aplicaciones.",
       "priceCents": 39900,
       "active": true,
       "categoryId": "category-general",
@@ -135,7 +135,7 @@
     {
       "id": "cmvwwkiwq0004w8y2gyg3fujj",
       "name": "iPhone 13",
-      "description": "iPhone 13. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Un compañero para comunicarte, sacar fotos y disfrutar de música, juegos y videos. Una propuesta equilibrada para acompañar tus actividades de todos los días.",
       "priceCents": 39900,
       "active": true,
       "categoryId": "category-general",
@@ -148,7 +148,7 @@
     {
       "id": "cmvwwkiwx0005w8y2nzt7mwwd",
       "name": "iPhone 13 mini",
-      "description": "iPhone 13 mini. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Un iPhone compacto para quienes valoran la comodidad de llevar el teléfono en cualquier bolsillo. Permite disfrutar de tus aplicaciones y contenidos sin elegir un equipo grande.",
       "priceCents": 37900,
       "active": true,
       "categoryId": "category-general",
@@ -161,7 +161,7 @@
     {
       "id": "cmvwwkix50006w8y2er8ay641",
       "name": "iPhone 13 Pro",
-      "description": "iPhone 13 Pro. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Pensado para quienes quieren explorar la fotografía y el video desde su teléfono. Una opción de la línea Pro para crear contenido, trabajar y disfrutar del entretenimiento.",
       "priceCents": 44900,
       "active": true,
       "categoryId": "category-general",
@@ -174,7 +174,7 @@
     {
       "id": "cmvwwkixc0007w8y23pjva8t6",
       "name": "iPhone 13 Pro Max",
-      "description": "iPhone 13 Pro Max. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "El formato más amplio de la familia iPhone 13 Pro para disfrutar de fotos, videos y aplicaciones con mayor comodidad visual. Una alternativa para quienes prefieren teléfonos grandes.",
       "priceCents": 49900,
       "active": true,
       "categoryId": "category-general",
@@ -187,7 +187,7 @@
     {
       "id": "cmvwwkixi0008w8y2zw7uw5s2",
       "name": "iPhone 14",
-      "description": "iPhone 14. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Un iPhone para acompañarte en conversaciones, fotos, videollamadas y momentos de entretenimiento. Su propuesta versátil se adapta tanto al trabajo como al uso personal.",
       "priceCents": 49900,
       "active": true,
       "categoryId": "category-general",
@@ -200,7 +200,7 @@
     {
       "id": "cmvwwkixt0009w8y2zwfm6nvv",
       "name": "iPhone 14 Plus",
-      "description": "iPhone 14 Plus. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Una opción de formato amplio para quienes disfrutan de leer, ver series y navegar desde el teléfono. Ofrece más espacio visual para tus aplicaciones y contenidos favoritos.",
       "priceCents": 54900,
       "active": true,
       "categoryId": "category-general",
@@ -213,7 +213,7 @@
     {
       "id": "cmvwwkiy2000aw8y2gn893rqo",
       "name": "iPhone 14 Pro",
-      "description": "iPhone 14 Pro. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Una propuesta de la línea Pro para quienes disfrutan de crear fotos y videos desde el teléfono. Combina un diseño cuidado con funciones para organizar el trabajo y el tiempo libre.",
       "priceCents": 59900,
       "active": true,
       "categoryId": "category-general",
@@ -226,7 +226,7 @@
     {
       "id": "cmvwwkiyh000bw8y2ea8rwfsi",
       "name": "iPhone 14 Pro Max",
-      "description": "iPhone 14 Pro Max. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Un iPhone Pro de gran formato para crear y revisar contenido con comodidad. Ideal para quienes priorizan una experiencia visual amplia al usar sus aplicaciones.",
       "priceCents": 64900,
       "active": true,
       "categoryId": "category-general",
@@ -239,7 +239,7 @@
     {
       "id": "cmvwwkiyp000cw8y2bl92f6tv",
       "name": "iPhone 15 Plus",
-      "description": "iPhone 15 Plus. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Un iPhone de formato amplio para ver contenido, leer y mantenerte conectado. Una alternativa para quienes prefieren más espacio en pantalla en sus actividades cotidianas.",
       "priceCents": 64900,
       "active": true,
       "categoryId": "category-general",
@@ -252,7 +252,7 @@
     {
       "id": "cmvwwkiyy000dw8y28wjrhpua",
       "name": "iPhone 15 Pro",
-      "description": "iPhone 15 Pro. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Un iPhone de la línea Pro pensado para fotografía, video y uso intensivo de aplicaciones. Una opción para combinar creación de contenido, productividad y entretenimiento.",
       "priceCents": 74900,
       "active": true,
       "categoryId": "category-general",
@@ -265,7 +265,7 @@
     {
       "id": "cmvwwkiz4000ew8y2f6xvh1sr",
       "name": "iPhone 15 Pro Max",
-      "description": "iPhone 15 Pro Max. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "La propuesta de mayor formato de la familia iPhone 15 Pro. Pensada para quienes buscan comodidad al encuadrar fotos, editar contenido y disfrutar de videos desde el teléfono.",
       "priceCents": 84900,
       "active": true,
       "categoryId": "category-general",
@@ -278,7 +278,7 @@
     {
       "id": "cmvwwkiza000fw8y2vnkbx8wj",
       "name": "iPhone 16",
-      "description": "iPhone 16. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Un iPhone para capturar tus momentos, comunicarte y organizar tu día. Una opción versátil para disfrutar de aplicaciones, contenidos y actividades personales en un mismo equipo.",
       "priceCents": 69900,
       "active": true,
       "categoryId": "category-general",
@@ -291,7 +291,7 @@
     {
       "id": "cmvwwkizh000gw8y21q36f82y",
       "name": "iPhone 16 Plus",
-      "description": "iPhone 16 Plus. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Una alternativa de formato amplio dentro de la familia iPhone 16. Pensada para quienes disfrutan de ver videos, leer y trabajar desde el teléfono con mayor comodidad visual.",
       "priceCents": 79900,
       "active": true,
       "categoryId": "category-general",
@@ -304,7 +304,7 @@
     {
       "id": "cmvwwkizn000hw8y2cre3a7yu",
       "name": "iPhone 16 Pro",
-      "description": "iPhone 16 Pro. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Un iPhone de la línea Pro para quienes disfrutan de la fotografía, el video y la creación de contenido. Su propuesta combina herramientas de uso diario con una experiencia orientada al trabajo y al entretenimiento.",
       "priceCents": 89900,
       "active": true,
       "categoryId": "category-general",
@@ -317,7 +317,7 @@
     {
       "id": "cmvwwkizw000iw8y2hpr5dnv0",
       "name": "iPhone 16 Pro Max",
-      "description": "iPhone 16 Pro Max. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "La opción de mayor formato de la familia iPhone 16 Pro. Pensada para crear contenido y disfrutar de tus fotos, videos y aplicaciones con más espacio visual.",
       "priceCents": 99900,
       "active": true,
       "categoryId": "category-general",
@@ -330,7 +330,7 @@
     {
       "id": "cmvwwkj0c000kw8y2tkhvk25j",
       "name": "iPad",
-      "description": "iPad. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Una tablet versátil para estudiar, leer, hacer videollamadas y disfrutar de tus contenidos favoritos. Su formato resulta práctico para combinar actividades de aprendizaje y entretenimiento.",
       "priceCents": 34900,
       "active": true,
       "categoryId": "cmvwwkj04000jw8y2yyt34jn6",
@@ -343,7 +343,7 @@
     {
       "id": "cmvwwkj0i000lw8y2xf685xas",
       "name": "iPad mini",
-      "description": "iPad mini. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Una tablet compacta y fácil de transportar para leer, tomar notas y consultar contenido donde estés. Una alternativa para quienes buscan comodidad sin llevar un equipo grande.",
       "priceCents": 44900,
       "active": true,
       "categoryId": "cmvwwkj04000jw8y2yyt34jn6",
@@ -356,7 +356,7 @@
     {
       "id": "cmvwwkj0p000mw8y2gjbp4lfo",
       "name": "iPad Air",
-      "description": "iPad Air. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Una tablet para combinar estudio, trabajo y creatividad en un formato fácil de llevar. Útil para organizar tareas, revisar documentos y disfrutar de contenido multimedia.",
       "priceCents": 59900,
       "active": true,
       "categoryId": "cmvwwkj04000jw8y2yyt34jn6",
@@ -369,7 +369,7 @@
     {
       "id": "cmvwwkj0x000nw8y2foyn2r2x",
       "name": "iPad Pro",
-      "description": "iPad Pro. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Una tablet de la línea Pro orientada a proyectos creativos, trabajo y entretenimiento. Una alternativa para quienes buscan integrar sus aplicaciones y contenidos en un equipo portátil.",
       "priceCents": 99900,
       "active": true,
       "categoryId": "cmvwwkj04000jw8y2yyt34jn6",
@@ -382,7 +382,7 @@
     {
       "id": "cmvwwkj15000ow8y2mrlr9nzs",
       "name": "MacBook Air 13",
-      "description": "MacBook Air 13. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Una notebook de formato compacto para estudiar, trabajar y llevar tus proyectos a todas partes. Su tamaño de 13 pulgadas resulta práctico para moverte entre casa, clases y oficina.",
       "priceCents": 99900,
       "active": true,
       "categoryId": "cmvvmnpzm0001txy2q4m5apn5",
@@ -395,7 +395,7 @@
     {
       "id": "cmvwwkj1c000pw8y2onvlet8j",
       "name": "MacBook Air 15",
-      "description": "MacBook Air 15. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Una notebook con formato de 15 pulgadas para quienes prefieren más espacio de trabajo. Una alternativa para documentos, navegación y contenidos multimedia sin renunciar a la portabilidad.",
       "priceCents": 119900,
       "active": true,
       "categoryId": "cmvvmnpzm0001txy2q4m5apn5",
@@ -408,7 +408,7 @@
     {
       "id": "cmvwwkj1j000qw8y27tfcsyeu",
       "name": "MacBook Pro 14",
-      "description": "MacBook Pro 14. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Una notebook de la línea Pro con formato de 14 pulgadas para trabajo, estudio y proyectos creativos. Pensada para acompañarte cuando necesitás combinar movilidad y un espacio de trabajo cómodo.",
       "priceCents": 159900,
       "active": true,
       "categoryId": "cmvvmnpzm0001txy2q4m5apn5",
@@ -421,7 +421,7 @@
     {
       "id": "cmvwwkj1r000rw8y2tl04u9ws",
       "name": "Mac mini",
-      "description": "Mac mini. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Una computadora de escritorio compacta para armar tu espacio de trabajo con el monitor, teclado y mouse que prefieras. Una alternativa para productividad y entretenimiento que ocupa poco lugar.",
       "priceCents": 59900,
       "active": true,
       "categoryId": "cmvvmnpzm0001txy2q4m5apn5",
@@ -434,7 +434,7 @@
     {
       "id": "cmvwwkj2a000tw8y2t48cqqqo",
       "name": "AirPods 3",
-      "description": "AirPods 3. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Auriculares inalámbricos para escuchar música, podcasts y atender llamadas con libertad de movimiento. Su formato abierto resulta práctico para acompañar tus actividades cotidianas.",
       "priceCents": 12900,
       "active": true,
       "categoryId": "cmvwwkj1z000sw8y2984yv0bb",
@@ -447,7 +447,7 @@
     {
       "id": "cmvwwkj2l000uw8y2el4a3ru6",
       "name": "AirPods 4",
-      "description": "AirPods 4. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Auriculares inalámbricos de formato abierto para disfrutar de música, conversaciones y podcasts durante el día. Una opción cómoda para llevar tu audio a distintas actividades.",
       "priceCents": 14900,
       "active": true,
       "categoryId": "cmvwwkj1z000sw8y2984yv0bb",
@@ -460,7 +460,7 @@
     {
       "id": "cmvwwkj2x000vw8y24beafp3p",
       "name": "AirPods Pro 2",
-      "description": "AirPods Pro 2. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Auriculares inalámbricos con almohadillas para quienes prefieren un ajuste dentro del oído. Pensados para escuchar música, disfrutar de podcasts y conversar mientras te movés.",
       "priceCents": 19900,
       "active": true,
       "categoryId": "cmvwwkj1z000sw8y2984yv0bb",
@@ -473,7 +473,7 @@
     {
       "id": "cmvwwkj38000ww8y23o2kj20e",
       "name": "AirPods Max",
-      "description": "AirPods Max. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Auriculares inalámbricos de diadema que cubren los oídos para disfrutar de tus contenidos de audio. Una alternativa para escuchar música, ver películas o acompañar tus momentos de concentración.",
       "priceCents": 49900,
       "active": true,
       "categoryId": "cmvwwkj1z000sw8y2984yv0bb",
@@ -486,7 +486,7 @@
     {
       "id": "cmvwwkj3m000xw8y2s1p7e32a",
       "name": "Cargador USB-C 20 W",
-      "description": "Cargador USB-C 20 W. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Adaptador de corriente USB-C de 20 W para cargar dispositivos compatibles. Una opción práctica para disponer de un punto de carga en casa, en la oficina o durante tus viajes.",
       "priceCents": 2500,
       "active": true,
       "categoryId": "cmvvm89u60000txy20go8293g",
@@ -499,7 +499,7 @@
     {
       "id": "cmvwwkj3z000yw8y2ievucifu",
       "name": "Cable USB-C de 1 metro",
-      "description": "Cable USB-C de 1 metro. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Cable USB-C de un metro para conectar y cargar dispositivos compatibles. Su longitud resulta práctica para el escritorio, la mesa de luz o para llevarlo con tus accesorios.",
       "priceCents": 1500,
       "active": true,
       "categoryId": "cmvvm89u60000txy20go8293g",
@@ -512,7 +512,7 @@
     {
       "id": "cmvwwkj49000zw8y27no2a4ho",
       "name": "Cargador MagSafe",
-      "description": "Cargador MagSafe. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Cargador magnético para dispositivos compatibles con MagSafe. Una alternativa para apoyar y cargar el teléfono cómodamente en tu escritorio o mesa de luz.",
       "priceCents": 3900,
       "active": true,
       "categoryId": "cmvvm89u60000txy20go8293g",
@@ -525,7 +525,7 @@
     {
       "id": "cmvwwkj4h0010w8y2rzynha4h",
       "name": "Funda transparente para iPhone 15",
-      "description": "Funda transparente para iPhone 15. Producto del catálogo de demostración, con precio de prueba en USD. Imagen pendiente de carga.",
+      "description": "Funda transparente para iPhone 15 que permite conservar a la vista el diseño del teléfono. Un accesorio para acompañar el uso diario y ayudar a protegerlo de roces y marcas.",
       "priceCents": 1900,
       "active": true,
       "categoryId": "cmvvm89u60000txy20go8293g",

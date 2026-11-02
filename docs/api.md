@@ -58,7 +58,7 @@ Los dos ejemplos usan imports distintos: `~/lib/trpc/server` y `~/lib/trpc/react
 | `/api/uploads/categories` | POST multipart | ADMIN y origen válido; campos `file` y `categoryId`; portada validada en S3             |
 | `/api/webhooks/stripe`    | POST           | Cuerpo original y firma `Stripe-Signature`, solo eventos de prueba admitidos            |
 
-Archivos: JPEG, PNG o WebP; máximo 5 MB, 16 megapíxeles y cuerpo multipart de 6 MB. Se convierten a WebP de hasta 2000 × 2000. PostgreSQL almacena la clave S3, no bytes ni URLs temporales. No compartir las URLs firmadas.
+Archivos: JPEG, PNG o WebP; máximo 4 MB, 16 megapíxeles y cuerpo multipart de 4 MB + 128 KiB. Se convierten a WebP de hasta 2000 × 2000. PostgreSQL almacena la clave S3, no bytes ni URLs temporales. No compartir las URLs firmadas.
 
 El webhook maneja `checkout.session.completed` y `checkout.session.expired`. Verifica el estado actual en Stripe, referencia, importe y moneda; crea una única orden y conserva el carrito si cambió durante el pago. No acepta `isPaid` del frontend.
 

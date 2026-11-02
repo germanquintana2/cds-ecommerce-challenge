@@ -1,0 +1,13 @@
+.git
+.next
+node_modules
+.env*
+!.env.example
+.aws
+.codex
+.claude
+.agents
+coverage
+*.log
+*.tsbuildinfo
+src/generated/prisma

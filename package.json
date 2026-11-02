@@ -15,13 +15,13 @@
     "db:migrate": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy",
     "db:seed": "bun scripts/seed.ts",
-    "db:seed:products": "bun scripts/seed-demo-products.ts",
     "test:integration": "bun test tests/integration",
     "test:unit": "bun test tests/unit",
     "db:studio": "prisma studio",
     "db:export:catalog": "bun scripts/export-catalog.ts",
     "db:seed:catalog": "bun scripts/seed-catalog.ts",
-    "setup": "node scripts/setup.mjs"
+    "setup": "node scripts/setup.mjs",
+    "vercel-build": "bun run db:generate && bun run build"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1157.0",
@@ -35,6 +35,8 @@
     "@trpc/client": "^11.18.0",
     "@trpc/react-query": "^11.18.0",
     "@trpc/server": "^11.18.0",
+    "@vercel/blob": "^2.8.2",
+    "@vercel/oidc-aws-credentials-provider": "^3.3.17",
     "better-auth": "^1.7.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -79,5 +81,8 @@
   ],
   "patchedDependencies": {
     "next@16.3.2": "patches/next@16.3.2.patch"
+  },
+  "engines": {
+    "node": "24.x"
   }
 }

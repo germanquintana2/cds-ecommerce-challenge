@@ -1,0 +1,12 @@
+.env*
+.aws
+.agents
+.claude
+.codex
+.git
+node_modules
+.next
+coverage
+Dockerfile
+compose*.yaml
+docker.env.example

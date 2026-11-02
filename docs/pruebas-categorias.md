@@ -24,7 +24,7 @@ Pruebas automáticas: `tests/integration/categories.test.js`, en base exclusiva 
 - Guardar: debe volver a la tabla; en el catálogo la nueva categoría usa su propia imagen y contiene los productos elegidos que estén activos.
 - Los productos seleccionados dejan su categoría anterior. Los quitados de la selección conservan la anterior. Las compras históricas no cambian.
 - Cancelar antes de guardar no crea la categoría ni modifica productos.
-- Probar nombre duplicado, archivo inválido y más de 5 MB. Debe mostrar el error y conservar nombre/selección para corregirlo.
+- Probar nombre duplicado, archivo inválido y más de 4 MB. Debe mostrar el error y conservar nombre/selección para corregirlo.
 - Crear sin imagen ni productos sigue siendo válido; se verá un marcador de portada hasta asignar un producto activo con imagen.
 - El botón Editar de la tabla abre `/admin/categories/[id]/edit`, con el mismo diseño del formulario de creación.
 

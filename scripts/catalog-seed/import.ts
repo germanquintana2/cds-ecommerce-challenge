@@ -68,28 +68,31 @@ export async function importCatalog(
       imageKey: image ? await upload("products", product.id, image) : null,
     });
   }
-  await db.$transaction(async (tx) => {
-    // Initialize only the untouched, empty placeholder created by the migrations.
-    if (bootstrapCategory) {
-      const updated = await tx.category.updateMany({
-        where: {
-          id: "category-general",
-          name: "General",
-          imageKey: null,
-          products: { none: {} },
-        },
-        data: {
-          name: bootstrapCategory.name,
-          imageKey: bootstrapCategory.imageKey,
-        },
-      });
-      if (updated.count !== 1)
-        throw new Error("La categoría inicial cambió; reintentá la seed.");
-    }
-    for (const category of newCategories)
-      await tx.category.create({ data: category });
-    for (const product of newProducts)
-      await tx.product.create({ data: product });
-  });
+  await db.$transaction(
+    async (tx) => {
+      // Initialize only the untouched, empty placeholder created by the migrations.
+      if (bootstrapCategory) {
+        const updated = await tx.category.updateMany({
+          where: {
+            id: "category-general",
+            name: "General",
+            imageKey: null,
+            products: { none: {} },
+          },
+          data: {
+            name: bootstrapCategory.name,
+            imageKey: bootstrapCategory.imageKey,
+          },
+        });
+        if (updated.count !== 1)
+          throw new Error("La categoría inicial cambió; reintentá la seed.");
+      }
+      for (const category of newCategories)
+        await tx.category.create({ data: category });
+      for (const product of newProducts)
+        await tx.product.create({ data: product });
+    },
+    { maxWait: 10000, timeout: 30000 },
+  );
   return { categories: newCategories.length, products: newProducts.length };
 }

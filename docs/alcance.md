@@ -1,6 +1,6 @@
 # Alcance del challenge
 
-Fecha de definición: 27 de octubre de 2026. Objetivo: entrega el lunes 2 de noviembre de 2026. Actualizado el 31 de octubre de 2026 para reflejar la implementación local.
+Fecha de definición: 27 de octubre de 2026. Objetivo: entrega el lunes 2 de noviembre de 2026. Actualizado el 1 de noviembre de 2026 para reflejar la entrega local y pública.
 
 ## Producto
 
@@ -19,7 +19,7 @@ Tienda web con catálogo público, usuarios registrados, carrito persistente, pa
 | Productos                             | Nombre, descripción, precio mayor que cero, una imagen y estado activo                                     |
 | Cantidades                            | Enteros de 1 a 99 por producto; eliminar mediante una operación explícita                                  |
 | Carrito                               | Uno por usuario, persistido en PostgreSQL; requiere sesión                                                 |
-| Imágenes                              | S3 privado en us-east-2, JPEG/PNG/WebP hasta 5 MB, lectura por enlaces temporales                          |
+| Imágenes                              | S3 privado en local; Vercel Blob en producción; JPEG/PNG/WebP hasta 4 MB                                   |
 | Pago                                  | Stripe Checkout alojado, solo tarjetas y entorno de pruebas                                                |
 | Orden                                 | Se crea al confirmar el pago; conserva nombres, precios y cantidades de la compra                          |
 | Impuestos y envío                     | Sin cálculo adicional; total igual al subtotal                                                             |
@@ -27,7 +27,7 @@ Tienda web con catálogo público, usuarios registrados, carrito persistente, pa
 | Devoluciones y cancelación de órdenes | Fuera del alcance                                                                                          |
 | Idioma e interfaz                     | Español y diseño responsive                                                                                |
 | Ejecución                             | Next.js en localhost:3100 y PostgreSQL en localhost:5433                                                   |
-| Publicación                           | Ejecución local reproducible obligatoria; despliegue público solo si queda tiempo                          |
+| Publicación                           | Docker Compose y demo pública en Vercel con Neon y Blob                                                    |
 
 No se implementarán microservicios, una API REST duplicada ni funcionalidades de IA. La carpeta de frontend/backend separada es una sugerencia del enunciado; se explica en el README la separación lógica dentro de Next.js.
 

@@ -102,7 +102,7 @@ export function CategoryForm({ initial }: { initial?: InitialCategory }) {
       !selectedFile.size ||
       selectedFile.size > MAX_IMAGE_BYTES
     ) {
-      setImageError("Elegí una imagen JPEG, PNG o WebP de hasta 5 MB.");
+      setImageError("Elegí una imagen JPEG, PNG o WebP de hasta 4 MB.");
       if (fileInput.current) fileInput.current.value = "";
       return;
     }
@@ -203,7 +203,7 @@ export function CategoryForm({ initial }: { initial?: InitialCategory }) {
           aria-describedby="category-image-help"
         />
         <p id="category-image-help" className="text-sm text-muted-foreground">
-          JPEG, PNG o WebP, hasta 5 MB y 16 megapíxeles. Se convertirá a WebP.
+          JPEG, PNG o WebP, hasta 4 MB y 16 megapíxeles. Se convertirá a WebP.
         </p>
         {preview ? (
           <div className="flex flex-col items-start gap-3">

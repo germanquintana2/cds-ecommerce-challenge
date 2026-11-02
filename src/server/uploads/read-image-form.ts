@@ -1,6 +1,6 @@
 import { ImageValidationError } from "~/server/integrations/product-images";
 
-const MAX_REQUEST_BYTES = 6 * 1024 * 1024;
+const MAX_REQUEST_BYTES = 4 * 1024 * 1024 + 128 * 1024;
 
 export async function readImageForm(request: Request) {
   const type = request.headers.get("content-type") ?? "";

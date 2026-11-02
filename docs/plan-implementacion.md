@@ -6,7 +6,7 @@ Documento de trabajo. El usuario autorizó publicar la preparación e iniciar la
 
 Las etapas de datos, permisos, productos/S3, catálogo, carrito, pagos y órdenes están implementadas. También hay categorías con portada y asignaciones, eliminación confirmada, búsqueda priorizada, paginación y navegación responsive. El dashboard redirige al perfil.
 
-El candidato confirmó las pruebas manuales completas y correctas; queda el arranque desde una instalación limpia. El registro vigente es [validacion.md](validacion.md). Typecheck, lint, build, 14 pruebas unitarias y 38 de integración aprobados.
+El candidato confirmó las pruebas manuales completas y correctas; se comprobó además el arranque Docker con base nueva y carga de fotos. El registro vigente es [validacion.md](validacion.md). Typecheck, lint, build, 16 pruebas unitarias y 38 de integración aprobados.
 
 El trabajo final permanece local: no hacer commits ni pushes hasta autorización del candidato.
 

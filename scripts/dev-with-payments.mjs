@@ -4,7 +4,8 @@ import { createServer } from "node:net";
 import { createInterface } from "node:readline";
 
 if (
-  !process.env.STRIPE_WEBHOOK_SECRET ||
+  (!process.env.STRIPE_WEBHOOK_SECRET &&
+    process.env.CDS_MANAGED_DOCKER !== "1") ||
   !/^(sk|rk)_test_/.test(process.env.STRIPE_SECRET_KEY ?? "")
 ) {
   console.error("Configurá las claves de prueba de Stripe en .env.");
@@ -77,6 +78,8 @@ for (const stream of [listener.stdout, listener.stderr]) {
     const secret = line.match(/whsec_[A-Za-z0-9]+/)?.[0];
     console.log(line.replace(/whsec_[A-Za-z0-9]+/g, "[secreto oculto]"));
     if (!secret || appStarted || stopping) return;
+    if (process.env.CDS_MANAGED_DOCKER === "1")
+      process.env.STRIPE_WEBHOOK_SECRET = secret;
     if (secret !== process.env.STRIPE_WEBHOOK_SECRET) {
       console.error(
         "El secreto del listener no coincide con STRIPE_WEBHOOK_SECRET. Actualizalo localmente y volvé a iniciar.",
@@ -89,7 +92,11 @@ for (const stream of [listener.stdout, listener.stderr]) {
     console.log(
       "Listener verificado. Iniciando la tienda con pagos de prueba.",
     );
-    launch("bun", ["run", "dev"], { stdio: "inherit" });
+    launch(
+      "bun",
+      ["run", process.env.CDS_APP_MODE === "production" ? "start" : "dev"],
+      { stdio: "inherit" },
+    );
   });
 }
 process.on("SIGINT", () => stop());

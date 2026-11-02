@@ -2,7 +2,7 @@ import { categoryIdSchema } from "./category";
 import { z } from "zod";
 
 export const MAX_PRICE_CENTS = 99_999_999;
-export const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
+export const MAX_IMAGE_BYTES = 4 * 1024 * 1024;
 export const productIdSchema = z.object({
   id: z
     .string()

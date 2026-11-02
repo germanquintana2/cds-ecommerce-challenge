@@ -141,7 +141,11 @@ async function main() {
   env.STRIPE_WEBHOOK_SECRET = secret;
   await save(original, env);
   console.log("Preparando PostgreSQL, migraciones y administrador…");
-  await run("docker", ["compose", "up", "-d", "--wait"], env);
+  await run(
+    "docker",
+    ["compose", "-f", "compose.database.yaml", "up", "-d", "--wait"],
+    env,
+  );
   await run("bun", ["run", "db:generate"], env);
   await run("bun", ["run", "db:deploy"], env);
   await run("bun", ["run", "db:seed"], env);

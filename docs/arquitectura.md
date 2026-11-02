@@ -136,3 +136,11 @@ No se agrega una cola para este volumen: el procesamiento consiste en una consul
 Las búsquedas de productos calculan primero el conjunto cuyo nombre empieza con la consulta y después las coincidencias internas. El catálogo pagina ambos conjuntos en ese orden, sin duplicados; las sugerencias completan hasta cuatro opciones. Los borradores y las bajas lógicas se excluyen de todas las lecturas públicas.
 
 La subida de portadas usa `POST /api/uploads/categories`. Los archivos se validan y convierten a WebP antes de guardarse en S3. La referencia completa de procedimientos y handlers está en [api.md](api.md).
+
+## Ejecución con Docker Compose
+
+La ejecución local principal usa `compose.yaml`: `prepare` genera secretos persistentes, PostgreSQL espera a esa configuración, `init` aplica migraciones/seed y la aplicación arranca después de su finalización exitosa. La imagen contiene Node 24, Bun 1.2.20, Stripe CLI y el build de Next.js; no copia `.env`, `.aws` ni dependencias del host.
+
+`postgres_data` conserva la base; `runtime_config` conserva contraseñas y configuración privada. `aws_session` conserva la sesión temporal de AWS y permite su actualización dentro de Docker. La autenticación se realiza con el servicio `aws` y `login --remote`; CLI y SDK comparten el volumen `aws_session`, sin montar archivos AWS del host. No se publican las credenciales como archivos estáticos ni se incorporan a las capas de la imagen. Next.js y el listener comparten supervisor para sincronizar el secreto y detenerse juntos ante un fallo.
+
+`compose.database.yaml` permite conservar el modo de desarrollo con Node/Bun en el host; no se ejecuta simultáneamente con la aplicación Docker en los mismos puertos. Ambos archivos mantienen el nombre del proyecto y el volumen de PostgreSQL para no perder datos al cambiar de modo.

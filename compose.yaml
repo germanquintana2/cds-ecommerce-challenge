@@ -1,21 +1,96 @@
 name: cds-ecommerce-challenge
 
+x-application: &application
+  image: cds-ecommerce-challenge:local
+  build: .
+
 services:
+  aws:
+    image: amazon/aws-cli:2.38.6
+    profiles: ["tools"]
+    environment:
+      AWS_REGION: ${AWS_REGION:-us-east-2}
+      AWS_PROFILE: ${AWS_PROFILE:-default}
+      AWS_PAGER: ""
+    volumes:
+      - aws_session:/root/.aws
+    stdin_open: true
+    tty: true
+
+  prepare:
+    <<: *application
+    command: ["node", "scripts/docker/prepare.mjs"]
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-cds}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-}
+      POSTGRES_DB: ${POSTGRES_DB:-cds_ecommerce}
+      BETTER_AUTH_SECRET: ${BETTER_AUTH_SECRET:-}
+      BETTER_AUTH_URL: ${BETTER_AUTH_URL:-http://localhost:3100}
+      ADMIN_EMAIL: ${ADMIN_EMAIL:-admin@example.com}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:-}
+      ADMIN_NAME: ${ADMIN_NAME:-Administrador CDS}
+      AWS_REGION: ${AWS_REGION:-us-east-2}
+      AWS_PROFILE: ${AWS_PROFILE:-default}
+      S3_BUCKET_NAME: ${S3_BUCKET_NAME:?Set S3_BUCKET_NAME in .env}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY:?Set STRIPE_SECRET_KEY in .env}
+    volumes:
+      - runtime_config:/runtime
+
   postgres:
     image: postgres:17-alpine
+    depends_on:
+      prepare:
+        condition: service_completed_successfully
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:?Set POSTGRES_USER in .env}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
-      POSTGRES_DB: ${POSTGRES_DB:?Set POSTGRES_DB in .env}
+      POSTGRES_USER: ${POSTGRES_USER:-cds}
+      POSTGRES_DB: ${POSTGRES_DB:-cds_ecommerce}
+      POSTGRES_PASSWORD_FILE: /runtime/postgres-password
     ports:
       - "127.0.0.1:${POSTGRES_PORT:-5433}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - runtime_config:/runtime:ro
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
       interval: 5s
       timeout: 5s
       retries: 10
 
+  init:
+    <<: *application
+    command: ["node", "scripts/docker/run.mjs", "init"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - runtime_config:/runtime:ro
+      - aws_session:/root/.aws
+
+  app:
+    <<: *application
+    init: true
+    depends_on:
+      init:
+        condition: service_completed_successfully
+    ports:
+      - "127.0.0.1:${APP_PORT:-3100}:3100"
+    volumes:
+      - runtime_config:/runtime:ro
+      - aws_session:/root/.aws
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://localhost:3100').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))",
+        ]
+      interval: 15s
+      timeout: 5s
+      start_period: 60s
+      retries: 5
+
 volumes:
   postgres_data:
+  runtime_config:
+  aws_session:

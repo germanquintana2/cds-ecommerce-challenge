@@ -1,147 +1,161 @@
-# CDS E-commerce — instalación local
+# CDS E-commerce
 
-## Requisitos previos
+## Probar la demo pública
 
-- Node.js 24 o superior y Bun 1.2.20.
-- Docker con Docker Compose; el motor de Docker debe estar iniciado.
-- Stripe CLI instalada y disponible en `PATH`.
-- Un bucket S3 privado y acceso local de AWS para leer, subir y eliminar imágenes bajo `products/` y `categories/`.
-- Una clave de API de Stripe de **prueba** (`sk_test_…` o `rk_test_…`) con acceso a Checkout y al listener local.
-- Puertos `3100` (tienda) y `5433` (PostgreSQL) disponibles.
+Abrí [CDS · Tienda](https://cds-ecommerce-challenge.vercel.app) para probar la tienda sin instalar herramientas ni configurar AWS, Docker o Stripe.
 
-### Preparar las herramientas
+1. Explorá las categorías y los productos.
+2. Creá una cuenta desde **Iniciar sesión → Registrate**.
+3. Agregá productos al carrito y continuá al pago.
+4. Completá el pago con una tarjeta de prueba de Stripe y consultá el resultado en **Mis compras**. No se realizan cobros reales.
 
-1. Instalar **Node.js 24** desde la [descarga oficial](https://nodejs.org/en/download), seleccionando la versión 24 y el instalador para tu sistema. Incluye npm.
-2. Instalar la versión de Bun del proyecto y Stripe CLI:
+La cuenta administradora se entrega por separado; sus credenciales no se publican en el repositorio.
 
-   ```sh
-   npm install -g bun@1.2.20
-   npm install -g @stripe/cli
-   ```
+La demo usa Neon y Vercel Blob. La instalación local conserva S3. [Configuración del despliegue](docs/deployment/vercel.md).
 
-   Alternativas por sistema: [instalación de Bun](https://bun.sh/docs/installation) e [instalación de Stripe CLI](https://docs.stripe.com/cli/install).
+## Instalación local con Docker
 
-3. Instalar [Docker Desktop](https://docs.docker.com/get-started/get-docker/) para tu sistema y abrirlo. Esperar a que el motor esté listo. En Linux también se puede utilizar Docker Engine con el plugin Compose.
-4. Instalar **AWS CLI v2** siguiendo el [instalador oficial para macOS, Windows o Linux](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html). Se requiere 2.32 o superior si se utiliza `aws login`.
-5. Si vas a clonar el repositorio, instalar [Git](https://git-scm.com/downloads). No hace falta si recibiste el proyecto en ZIP.
+## Preparar los requisitos
 
-Abrir una terminal nueva y comprobar:
+Solo se necesitan **Docker**, acceso a AWS y una clave de Stripe de prueba. Node, Bun, PostgreSQL, Stripe CLI y las dependencias de la aplicación se ejecutan dentro de los contenedores.
 
-```sh
-node --version
-bun --version
-stripe --version
-docker compose version
-docker info
-aws --version
-```
+1. Instalar [Docker Desktop](https://docs.docker.com/get-started/get-docker/) y abrirlo. Esperar a que el motor esté listo. En Linux también sirve Docker Engine con Compose 2.24 o superior. Comprobar `docker compose version` y `docker info`.
+2. Preparar un bucket privado en Amazon S3 para guardar las fotos. Seguir los pasos de **Preparar S3 para la instalación local**, debajo. Si solo vas a usar la demo pública, podés omitir este requisito.
+3. Crear/seleccionar un sandbox en [Stripe](https://dashboard.stripe.com/register) y obtener su clave secreta de prueba `sk_test_…` desde [API keys](https://dashboard.stripe.com/apikeys). [Guía de claves](https://docs.stripe.com/keys).
 
-`node` debe indicar 24 o superior y `bun` 1.2.20. `docker info` debe responder sin error. Si algún comando no se reconoce, revisar su instalación y que esté disponible en `PATH`.
+No se instala AWS CLI, Stripe CLI, Node ni Bun en la computadora: Compose proporciona esas herramientas. Git es opcional si se descarga un ZIP. El uso de S3 puede generar cargos según el plan; no se utilizan pagos reales.
 
-### Preparar AWS y el bucket
+## Preparar S3 para la instalación local
 
-1. Usar una cuenta/proyecto AWS propio o un acceso proporcionado por tu organización.
-2. En la consola de S3, crear un bucket de propósito general con nombre único. En el entorno original se usa `us-east-2`; si tu proyecto tiene una región asignada, usar esa región. Mantener **Block Public Access** activado, ACL deshabilitadas y cifrado SSE-S3. [Guía oficial de creación](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html).
-3. El perfil local debe tener `s3:ListBucket` sobre el bucket y `s3:GetObject`, `s3:PutObject`, `s3:DeleteObject` sobre `products/*` y `categories/*`. Si no administrás los permisos, solicitar ese acceso al responsable de AWS. No es necesario hacer público el bucket ni habilitar CORS.
-4. Para un acceso que utiliza inicio de sesión de consola, autenticar un perfil local:
+Un **bucket** es un contenedor de archivos en AWS. La aplicación guarda allí las fotos de productos y categorías; PostgreSQL guarda sus datos y la referencia a cada foto. Docker configura la aplicación, pero no crea el bucket ni concede permisos de AWS automáticamente.
 
-   ```sh
-   aws login --profile cds-challenge
-   ```
+### Crear el bucket
 
-   Completar el navegador y comprobar el acceso con el nombre real de tu bucket y región:
+1. Ingresar a la [consola de AWS](https://console.aws.amazon.com/) y abrir **Amazon S3 → Buckets → Crear bucket**. Se necesita una cuenta/proyecto propio o acceso a uno que autorice su uso.
+2. Seleccionar la región del proyecto. Para este challenge es **US East (Ohio), `us-east-2`**. En la nueva experiencia de AWS, confirmar la región en **AWS Settings → View all projects → Overview → Additional Info → Region**.
+3. Seleccionar un bucket de **uso general** y escribir un nombre único, por ejemplo `cds-tienda-tu-nombre-2026`. Si AWS indica que ya existe, elegir otro.
+4. Mantener **ACL deshabilitadas**, **Bloquear todo el acceso público** activado y el cifrado **SSE-S3**. No habilitar alojamiento de sitios web. Crear el bucket.
+5. Anotar el nombre exacto y la región: se usarán en `S3_BUCKET_NAME` y `AWS_REGION` al completar `.env` en el paso siguiente.
 
-   ```sh
-   aws sts get-caller-identity --profile cds-challenge
-   aws s3api head-bucket --bucket TU_BUCKET --region us-east-2 --profile cds-challenge
-   ```
+No hace falta crear carpetas ni subir fotos a mano: la inicialización carga las imágenes de la seed bajo `products/` y `categories/`. Esos nombres son prefijos que organizan los archivos dentro del bucket.
 
-   Si tu organización usa IAM Identity Center/SSO, conservar su flujo (`aws sso login --profile TU_PERFIL`) en lugar de `aws login`. [Autenticación local con AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sign-in.html).
+### Autorizar el acceso de la aplicación
 
-5. Anotar **nombre del bucket, región y nombre del perfil**: son los tres valores que pedirá el instalador. No copiar credenciales temporales a `.env`.
+Crear un bucket y poder iniciar sesión en AWS son cosas distintas de tener permiso para usar sus archivos. La aplicación utiliza el acceso que selecciones al iniciar sesión con el servicio `aws` de Docker, explicado en **2. Autenticar AWS dentro de Docker**.
 
-El uso de S3 puede generar cargos según tu plan. Más detalles de la integración: [configuración S3 del proyecto](docs/aws/s3.md).
+Ese acceso debe permitir estas operaciones:
 
-### Preparar Stripe
+| Permiso           | Dónde se necesita                           | Para qué sirve                                                                     |
+| ----------------- | ------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `s3:ListBucket`   | Sobre el bucket elegido                     | Comprobar el acceso al bucket y distinguir archivos inexistentes durante la seed.  |
+| `s3:GetObject`    | Archivos bajo `products/*` y `categories/*` | Verificar y leer las imágenes, incluidas las lecturas mediante enlaces temporales. |
+| `s3:PutObject`    | Archivos bajo esos mismos prefijos          | Cargar las fotos de la seed y las nuevas imágenes.                                 |
+| `s3:DeleteObject` | Archivos bajo esos mismos prefijos          | Limpiar imágenes reemplazadas o subidas que no pudieron asociarse.                 |
 
-1. Crear una cuenta en [Stripe](https://dashboard.stripe.com/register) o usar una existente.
-2. Seleccionar o crear un **sandbox/entorno de pruebas** en el Dashboard. No activar pagos reales para probar este proyecto.
-3. Abrir la sección [API keys](https://dashboard.stripe.com/apikeys) del entorno de pruebas y obtener su clave secreta `sk_test_…`. Una clave restringida `rk_test_…` también sirve si permite Checkout y el listener; para una primera prueba local, la clave secreta de pruebas simplifica la configuración. [Guía oficial de claves](https://docs.stripe.com/keys).
-4. Tener esa clave disponible para pegarla cuando la solicite el instalador. La entrada estará oculta y se guardará únicamente en `.env`.
+Si tu acceso ya permite estas operaciones, no necesitás agregar permisos. En la nueva experiencia de AWS, los permisos del acceso humano los gestiona AWS; no es necesario crear claves permanentes para seguir este README. Si usás un acceso limitado de una organización, su administrador debe habilitar las operaciones de la tabla sobre tu bucket. Crear el bucket desde la consola también requiere permisos de creación y configuración, distintos de los que necesita la aplicación al funcionar.
 
-No hace falta ejecutar `stripe login` ni copiar manualmente un `whsec_…`: el instalador y el comando de arranque usan la clave indicada para sincronizar el listener con la aplicación. No utilizar claves `sk_live_…` ni compartir la clave de pruebas en el repositorio.
+**No desactives el bloqueo público para solucionar un error de permisos.** Las imágenes de S3 se muestran mediante enlaces temporales generados por el servidor; el bucket permanece privado. Si `head-bucket` del paso 2 devuelve `403`, revisar el nombre del bucket, la sesión y los permisos del acceso seleccionado.
 
-Las herramientas y cuentas se preparan una sola vez. El instalador no modifica instalaciones globales ni crea cuentas o buckets. Dejar libres los puertos 3100 y 5433 antes de continuar; si están ocupados por otro proyecto, detener ese servicio o revisar su configuración.
+Referencias: [crear un bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html), [bloquear el acceso público](https://docs.aws.amazon.com/AmazonS3/latest/userguide/configuring-block-public-access-bucket.html) y [configuración de S3 del proyecto](docs/aws/s3.md).
 
-## Instalar
+## 1. Obtener el proyecto
 
 ```sh
 git clone https://github.com/germanquintana2/cds-ecommerce-challenge.git
 cd cds-ecommerce-challenge
-bun run setup
+cp docker.env.example .env
 ```
 
-Si recibiste un ZIP, extraerlo y ejecutar `bun run setup` desde su carpeta.
+Si recibiste un ZIP, extraerlo y abrir una terminal en la carpeta. Si ya existe un `.env` configurado, conservarlo en lugar de copiar el ejemplo.
 
-La primera vez, el asistente solicita el bucket, región y perfil de AWS, y la clave de Stripe de prueba. La entrada de la clave está oculta. Si ya existe un `.env` válido, conserva sus valores y no vuelve a solicitarlos.
+Completar en `.env`:
 
-El instalador:
+```dotenv
+AWS_REGION=us-east-2
+S3_BUCKET_NAME=TU_BUCKET
+AWS_PROFILE=TU_PERFIL
+STRIPE_SECRET_KEY=TU_CLAVE_DE_PRUEBA
+```
 
-1. Comprueba las herramientas y que Docker esté funcionando.
-2. Crea o completa `.env`, generando contraseñas y secretos locales.
-3. Instala las dependencias con el lockfile del proyecto.
-4. Verifica S3 y Stripe sin realizar pagos, y obtiene el secreto del webhook local.
-5. Levanta PostgreSQL, genera Prisma y aplica las migraciones.
-6. Crea el administrador y carga las **5 categorías, 38 productos y sus fotos** en el bucket configurado.
-
-Puede repetirse si se interrumpe: no borra la base, no reemplaza las credenciales existentes del administrador ni sobrescribe productos ya cargados. Una instalación nueva usa las fotos incluidas en `data/catalog/`; no necesita acceso al bucket original del candidato.
-
-El bucket debe permitir listar/verificar y escribir los objetos de seed, además de leer las imágenes. Si falla la subida, corregir permisos o renovar la sesión y repetir el comando. El uso de S3 puede generar cargos según el plan de AWS.
-
-## Iniciar la tienda
+## 2. Autenticar AWS dentro de Docker
 
 ```sh
-bun run dev:payments
+docker compose run --rm aws login --remote
 ```
 
-Abrir [http://localhost:3100](http://localhost:3100).
+Abrir en tu navegador la URL que muestra el comando, seleccionar el acceso autorizado para el bucket y pegar el código de autorización en esa misma terminal. La región y el nombre de perfil se toman de `.env`.
 
-- **Administrador:** las credenciales están en `ADMIN_EMAIL` y `ADMIN_PASSWORD` de `.env`. Desde el menú del usuario se accede a Productos y Categorías.
-- **Cliente:** crear una cuenta desde [Registrarse](http://localhost:3100/signup), con contraseña de 12 a 128 caracteres.
+Comprobar el acceso:
 
-Mantener la terminal abierta: el comando inicia Stripe y Next.js juntos y detiene ambos si uno termina. No ejecutar simultáneamente `bun run dev`, porque usa el mismo puerto.
+```sh
+docker compose run --rm aws s3api head-bucket --bucket TU_BUCKET
+```
 
-Para probar una compra, agregar un producto al carrito e iniciar el pago. Usar la tarjeta de prueba `4242 4242 4242 4242`, fecha futura y CVC de tres cifras. Total mínimo: USD 0,50. Al regresar se confirma la compra y aparece en Mis compras.
+La sesión temporal queda en el volumen Docker `aws_session`, compartido con el SDK de la aplicación. No se monta `~/.aws`, no interviene el Llavero de macOS y no se exportan claves al repositorio. El volumen es privado del proyecto; no compartirlo ni eliminarlo al detener la aplicación.
+
+Si la organización utiliza IAM Identity Center/SSO, usar su flujo en el mismo contenedor:
+
+```sh
+docker compose run --rm aws configure sso --use-device-code
+docker compose run --rm aws sso login --use-device-code
+```
+
+Configurar el mismo nombre de perfil indicado en `AWS_PROFILE`. [Inicio de sesión remoto](https://docs.aws.amazon.com/cli/latest/reference/login/) y [AWS CLI en Docker](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-docker.html).
+
+## 3. Levantar todo
+
+```sh
+docker compose up --build
+```
+
+La primera ejecución descarga imágenes y compila la aplicación; necesita internet. Compose ejecuta, en orden:
+
+1. **prepare:** genera y conserva las contraseñas y secretos locales en un volumen privado de configuración.
+2. **postgres:** levanta la base y espera a que esté disponible.
+3. **init:** verifica S3/Stripe, aplica migraciones, crea el administrador y carga las 5 categorías, 38 productos y sus fotos en el bucket configurado.
+4. **app:** inicia Stripe CLI y, cuando el listener está listo, Next.js en modo producción. El secreto del webhook se sincroniza automáticamente.
+
+Abrir [http://localhost:3100](http://localhost:3100) cuando aparezca la tienda lista. Es normal que `prepare` e `init` terminen con código 0. En otra terminal se puede revisar el estado con `docker compose ps -a`.
+
+Para ejecutar en segundo plano: `docker compose up --build -d`. Ver los logs con `docker compose logs -f init app`.
+
+Las fotos están incluidas en `data/catalog/`; no se necesita acceso al bucket original del candidato. La inicialización se puede repetir: conserva registros existentes y no duplica ni sobrescribe productos.
+
+## 4. Ingresar y probar
+
+Para consultar las credenciales generadas del administrador, ejecutar explícitamente:
+
+```sh
+docker compose exec app node scripts/docker/run.mjs credentials
+```
+
+La contraseña no se imprime en los logs de arranque. No compartir la salida del comando. Si configuraste `ADMIN_EMAIL` y `ADMIN_PASSWORD` antes del primer arranque, se usan esos valores; cambiar variables después no restablece una cuenta existente.
+
+Como cliente, crear una cuenta desde [Registrarse](http://localhost:3100/signup), con contraseña de 12 a 128 caracteres.
+
+Para una compra de prueba, agregar un producto al carrito y pagar con `4242 4242 4242 4242`, fecha futura y CVC de tres cifras. Total mínimo: USD 0,50. Esperar la confirmación y consultar Mis compras.
 
 ## Detener y volver a iniciar
 
-Ctrl+C detiene la tienda y su listener. Para detener PostgreSQL sin borrar datos:
-
 ```sh
-docker compose stop
+docker compose down
+docker compose up -d
 ```
 
-Para volver a iniciar:
+`down` conserva los volúmenes con base de datos, configuración y sesión AWS. **No usar `down -v`** para detener: elimina esos datos. Si cambia el código, volver a ejecutar `docker compose up --build`.
 
-```sh
-docker compose up -d --wait
-bun run dev:payments
-```
+Si venció la sesión AWS, repetir `docker compose run --rm aws login --remote` (o el flujo SSO) y ejecutar de nuevo `docker compose up -d`. Si la aplicación conserva credenciales antiguas, ejecutar `docker compose restart app`. Si falló la carga inicial, repetir el arranque después de corregir el acceso.
 
-Si AWS venció, renovar la sesión del perfil por su flujo habitual. Si el secreto del listener cambió, volver a ejecutar `bun run setup` para sincronizarlo. Ante `EADDRINUSE`, detener el servidor anterior del puerto 3100.
+## Problemas frecuentes
 
-## Instalación sin asistente
+- **Puerto ocupado:** detener el servidor anterior de localhost:3100 o PostgreSQL:5433. No ejecutar el servidor local con Bun al mismo tiempo que la aplicación de Compose.
+- **AWS sin sesión:** completar el login en el contenedor con el perfil de `.env`. La sesión del host o un antiguo `.env.aws-docker` ya no se utilizan.
+- **S3 inaccesible:** revisar perfil, región, bucket, permisos y sesión. Los secretos no forman parte de la imagen.
+- **Stripe no inicia:** verificar que la clave es de prueba y tiene permisos de Checkout y del listener. El servicio detiene aplicación y listener juntos si alguno falla.
+- **Contraseña PostgreSQL cambiada:** modificar `.env` no cambia la contraseña de una base ya inicializada. Conservar la configuración correspondiente al volumen existente.
 
-Copiar `.env.example` a `.env` y completar el bucket, región/perfil y la clave de Stripe de prueba. Las contraseñas y secretos locales de ejemplo se reemplazan automáticamente. Después ejecutar:
+## Alternativa sin contenerizar la aplicación
 
-```sh
-bun run setup --non-interactive
-```
+Para desarrollo con Node 24+, Bun 1.2.20 y Stripe CLI instalados en la computadora, se conserva `bun run setup` y luego `bun run dev:payments`. El instalador utiliza `compose.database.yaml` exclusivamente para PostgreSQL. No mezclar ambos modos al mismo tiempo.
 
-Para validar accesos sin modificar `.env`, base de datos ni S3, una vez instaladas las dependencias y configurado `.env`:
-
-```sh
-bun run setup --check --non-interactive
-```
-
-El instalador prepara PostgreSQL local definido en `compose.yaml`. Si se usa otra contraseña o puerto, `DATABASE_URL` debe coincidir con las variables `POSTGRES_*`. Cambiar `.env` no cambia la contraseña de un volumen ya inicializado. No publicar `.env`: contiene credenciales locales.
+Para levantar solo esa base: `docker compose -f compose.database.yaml up -d --wait`.
